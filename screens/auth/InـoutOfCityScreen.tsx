@@ -149,17 +149,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
 
 
 
-    // const [openRegin, setOpenRegin] = useState(false);
-    // const [openRegin2, setOpenRegin2] = useState(false);
-    // const [valueRegin, setValueRegin] = useState(null);
-    // const [valueRegin2, setValueRegin2] = useState(null);
-    // const [itemsRegion, setItemsRegin,] = useState([
-    //     { label: 'Sakarya', value: 1 },
-    //     { label: 'Istanbul', value: 2 },
-    //     { label: 'ttt', value: 3 },
-    // ]);
-
-
+  
     const [phoneErrorMessage, setPhoneErrorMessage] = useState<string>('');
     const [fromWhereAddressDetails, setfromWhereAddressDetails] = useState('');
     const [toWhereAddressDetails, settoWhereAddressDetails] = useState('');
@@ -1041,72 +1031,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
 
 
 
-    // const [loaded, setLoaded] = useState(false);
-
-
-
-    
-
-    // const checkPhone = () => {
-    //     if (validator.isMobilePhone(phone,'tr-TR') == false) {
-    //         setPhoneErrorMessage(useLocalErrorMessage({}, "invalidPhone"))
-    //     }
-    // }
-    // const TripServics = () => {
-    //     console.log("TripServics   fun")
-
-    //     console.log("moveMyHouse: " + moveMyHouse)
-    //     console.log("TripServis: " + TripServis)
-    //     if (moveMyHouse === true) {
-    //         setTripServis(1)
-    //         console.log("TripServis after: " + TripServis)
-    //     }
-
-
-    //     console.log("moveMyStuff: " + moveMyStuff)
-    //     console.log("TripServis: " + TripServis)
-    //     if (moveMyStuff === true) {
-    //         setTripServis(2)
-    //     }
-
-    //     console.log("moveMyOffice: " + moveMyOffice)
-    //     console.log("TripServis: " + TripServis)
-
-    //     if (moveMyOffice === true) {
-    //         setTripServis(3)
-    //     }
-
-    // }
-
-    // const AddTrip = async (): Promise<boolean> => {
-
-
-
-    //     console.log("test signIn");
-    //     console.log("statTimeAndDate.date " + statTimeAndDate.date);
-
-    //     let result: boolean = true;
-
-    //     let response = await addTripService(
-    //         phone,
-    //         fromWhereAddressDetails,
-    //         toWhereAddressDetails,
-    //         statTimeAndDate.date,
-    //         statTimeAndDate.time,
-    //         TripServis,
-    //         "email",
-
-    //     )
-
-    //     if (response.success == true) {
-
-    //         return true
-    //     }
-
-
-
-    //     return false;
-    // }
+  // Send Trip infomation to database
     const AddTrip = async (): Promise<boolean> => {
 
         var randomIdForTrip = Math.floor(Math.random() * 10000);
@@ -1178,6 +1103,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
         //  navigation.navigate('ChooseLocation')
     }
 
+    // Calculate price of trip
     const calculatePrice = (distance: any, helpers: any) => {
         console.log("d " + distance); //9.246
         console.log("h " + helpers);
@@ -1220,18 +1146,6 @@ export default function InـoutOfCityScreen({ navigation }: any) {
         longitude: -122.4324,
     });
 
-    // const [ region, setRegion ] = React.useState({
-    // 	latitude: 37.78825,
-    // 	longitude: -122.4324,
-
-    // })
-
-    // function toggle() {
-    //     console.log("toggle fun")
-    //     const n = statToggleSearch.payload;
-    //     settoggle1(n);
-    //     return toggle1;
-    // }
 
     const [visible, setVisible] = React.useState(false);
     const ModalPoup = ({ visible, children }) => {
@@ -1394,9 +1308,8 @@ export default function InـoutOfCityScreen({ navigation }: any) {
                             <FontAwesome style={{ marginLeft: 70, marginRight: 10 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
 
                         </TouchableOpacity>
+
                     </View>
-
-
                 </ View>
 
 
@@ -2406,8 +2319,6 @@ export default function InـoutOfCityScreen({ navigation }: any) {
 
                         </TouchableOpacity>
                     </View>
-
-
                 </ View>
 
 
@@ -2424,8 +2335,8 @@ export default function InـoutOfCityScreen({ navigation }: any) {
                     styles.background
 
                 ]}>
-
                     <ScrollView style={{ backgroundColor: '#f2f2f7' }}>
+
                         <ModalPoup
                             visible={visible}>
                             <ScrollView >
@@ -2536,11 +2447,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
                         </TouchableOpacity>
 
                     </View>
-
-
                 </ View>
-
-
             ),
             Verifyier: async () => true,
             Submit: async () => true
