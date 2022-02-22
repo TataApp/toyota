@@ -1,0 +1,4 @@
+type withoutAccountStackParameterList = {
+    InـoutOfCityScreen: undefined;
+    
+};

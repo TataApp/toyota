@@ -1,0 +1,498 @@
+import { StackNavigationState } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View } from "../../components/themed/View";
+import { Text } from "../../components/themed/Text";
+import { ScreenContext } from '../../contexts/ScreenContext';
+import { useLocale } from '../../hooks/useLocale';
+import { FontSize } from '../../constants/FontSize';
+import validator from 'validator';
+import { useLocalErrorMessage } from '../../hooks/useLocalErrorMessage';
+import { checkEmailService } from '../../services/apiCalls/checkEmailService';
+import InputWithLabel from '../../components/customComponent/InputWithLabel';
+import IconButton from '../../components/customComponent/IconButton';
+import StagesLayout from '../../components/layouts/StagesLayout';
+import { checkPhoneService } from '../../services/apiCalls/checkPhoneService';
+import { signInService } from '../../services/apiCalls/signInService';
+
+import { signIn } from '../../services/navigation/signIn';
+import { getAccessTokenService } from '../../services/storageServices/getAccessTokenService';
+import { saveAccessTokenService } from '../../services/storageServices/saveAccessTokenService';
+import { saveRefreshTokenService } from '../../services/storageServices/saveRefreshTokenService';
+import { tokenSignIn } from '../../services/navigation/tokenSignIn';
+import Loading from '../../components/Loading';
+import TextButton from '../../components/themed/TextButton';
+import FlatButton from '../../components/FlatButton';
+import { useThemeColor } from '../../hooks/useThemeColor';
+import Layout from '../../constants/Layout';
+import BouncingPreloader from 'react-native-bouncing-preloader';
+import { showError } from '../helper/helperFunction';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../state/action-creators';
+import { useDispatch } from 'react-redux';
+// import AsyncStorage from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
+
+
+
+var Spinner = require('react-native-spinkit');
+export default function SignInScreen({ navigation }: { navigation: StackNavigationProp<AuthNavigationParamList, "SignInScreen"> }) {
+
+
+
+
+    const styles = StyleSheet.create({
+        container: {
+            paddingTop: 10,
+            alignItems: "center",
+            justifyContent: "center",
+
+        },
+        titleText:
+        {
+            fontSize: FontSize.Large,
+            paddingTop: 30,
+            paddingRight: 125,
+            color: 'black',
+
+
+        }, button: {
+            paddingBottom: 110,
+            paddingLeft: 30,
+            paddingRight: 30,
+
+            //  width:
+
+        }, newUser: {
+            paddingBottom: 10,
+            color: "#736e6e",
+            fontWeight: "bold"
+
+
+        },
+        topLabel: {
+            //paddingBottom: 40,
+            marginBottom: 80,
+            paddingRight: 20,
+            marginLeft: 20,
+            fontSize: 20,
+            color: useThemeColor({}, "gri")
+
+
+        }, topLabel2: {
+            //paddingBottom: 40,
+            marginBottom: 80,
+            marginLeft: 35,
+            fontSize: 20,
+            color: useThemeColor({}, "gri")
+
+
+        }, topLabel4: {
+            //paddingBottom: 40,
+            marginBottom: 80,
+            marginLeft: 20,
+            fontSize: 20,
+            color: useThemeColor({}, "gri")
+
+
+        },
+        center: {
+            width: '100%',
+            //  flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            paddingBottom: 30,
+            paddingTop: 30
+        },
+        center2: {
+            width: '100%',
+            //  flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            paddingBottom: 3,
+            paddingTop: 30
+        },
+        flex1: {
+            flex: 1,
+        },
+        rowFlex: {
+            flexDirection: 'row'
+        },
+        spaceBetween: {
+            justifyContent: 'space-between'
+        },
+        empty: {
+            height: 500,
+            backgroundColor: "#FFF"
+        }, background: {
+            backgroundColor: '#ffff',
+        },
+    })
+
+    const [email, setEmail] = useState<string>('');
+    const [emailErrorMessage, setEmailErrorMessage] = useState<string>('');
+    const [phoneErrorMessage, setPhoneErrorMessage] = useState<string>("");
+    const [passwardErrorMessage, setPasswardErrorMessage] = useState<string>('');
+    const [passward, setPassward] = useState<string>('');
+
+
+
+    const [phone, setPhone] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [loaded, setLoaded] = useState(false);
+
+
+
+    const checkEmail = async () => {
+
+        console.log("test checkEmail");
+
+        let result: boolean = true;
+        if (validator.isEmail(email) == false) {
+            // setEmailErrorMessage(useLocalErrorMessage({}, "invalidEmail"))
+            showError(useLocalErrorMessage({}, "invalidEmail"));
+            // result = false;
+            return false;
+
+        }
+
+        // setEmailErrorMessage("");
+
+
+
+
+        let responseEmail = await checkEmailService(email);
+
+        if (responseEmail.data.exists == false) {
+            // setEmailErrorMessage(useLocalErrorMessage({}, "emailDoesNotExist"))
+            showError(useLocalErrorMessage({}, "emailDoesNotExist"));
+
+            return false;
+        }
+        return result;
+    }
+
+
+    const checkPhone = async (): Promise<boolean> => {
+
+        console.log("test checkPhone");
+        let result: boolean = true;
+        if (validator.isMobilePhone(phone, 'tr-TR') == false) {
+            // setPhoneErrorMessage(useLocalErrorMessage({}, "invalidPhone"))
+            showError(useLocalErrorMessage({}, "invalidPhone"));
+            return false;
+
+        }
+        // return true
+
+
+        // if (result == false)
+        //     return false;
+
+        let responsePhone = await checkPhoneService(phone);
+
+        if (responsePhone.data.exists == false) {
+            // setPhoneErrorMessage(useLocalErrorMessage({}, "phoneDoesNotExist"))
+            showError(useLocalErrorMessage({}, "phoneDoesNotExist"));
+            return false;
+        }
+
+
+        console.log(responsePhone.data.exists);
+        return result;
+
+
+    }
+
+
+    // const checkPhone = async (): Promise<boolean> => {
+
+    //     console.log(phoneErrorMessage);
+    //     setPhoneErrorMessage( "invalidPhone")
+    //     let result: boolean = true;
+
+    //     if (validator.isMobilePhone(phone, 'tr-TR') == false) {
+    //        setPhoneErrorMessage(useLocalErrorMessage({}, "invalidPhone"))
+    //         result = false;
+    //     }
+
+
+    //     if (result == false)
+    //         return false;
+
+    //     let responsePhone = await checkPhoneService(phone);
+
+    //     console.log(responsePhone.data.exists);
+
+    //     if (responsePhone.data.exists == false) {
+    //         setPhoneErrorMessage(useLocalErrorMessage({}, "phoneDoesNotExist"))
+    //         return false;
+    //     }
+
+    //     return result;
+    // }
+
+
+
+
+    const checkPassward = async (): Promise<boolean> => {
+
+
+
+        console.log("test signIn");
+
+        let result: boolean = true;
+
+        if (passward !== "") {
+
+            let response = await signInService(
+                email,
+                phone,
+                passward
+            )
+
+
+            if (response.success == true) {
+                await saveAccessTokenService(response.data.accessToken);
+                await saveRefreshTokenService(response.data.refreshToken);
+
+
+                return true
+            } else {
+                showError("Şifre geçersiz")
+            }
+
+
+        } else {
+            showError("Şifre geçersiz")
+        }
+
+
+
+
+        return false;
+    }
+
+
+
+    const onSuccess = async () => {
+
+        await signIn();
+
+        try {
+            await AsyncStorage.setItem("phone", phone)
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+
+    const manageTokenSignIn = async (success: boolean) => {
+        // to open the signIn page without direct login
+        //  setLoaded(true)
+        // return;
+
+        if (success)
+            signIn();
+        else
+            setLoaded(true)
+    }
+
+
+    const Stages: Stage[] = [
+        {//1 phone
+            Component: (nextHundller, backHundller, finshHundller) => (
+                <View style={[
+                    styles.background,
+                    styles.flex1,
+                    styles.center
+                ]}>
+
+                    <Text style={styles.topLabel2} > {useLocale({}, "phoneScreen")}</Text>
+
+                    <View style={[styles.center2, styles.background]}>
+                        <InputWithLabel
+                            keyboadType='number-pad'
+                            errorMessage={""}
+                            label={useLocale({}, "PhoneLabel")}
+                            setValue={(value: string) => setPhone(value.trim())}
+                            value={phone.trim()}
+                            placeholder={useLocale({}, "PhonelLabel")}
+                        />
+                    </View>
+                    <Text style={{ color: 'red', fontSize: FontSize.Small }}>{phoneErrorMessage}</Text>
+
+
+                    <View style={[
+                        styles.background,
+                        styles.rowFlex,
+                        styles.spaceBetween
+                    ]}>
+                        <IconButton size={FontSize.xxxxxxxxxLarge} locked name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
+                        <IconButton
+                            size={FontSize.xxxxxxxxxLarge}
+                            locked
+                            name={useLocale({}, "direction") == "rtl" ? "chevron-circle-left" : "chevron-circle-right"}
+                            onClick={nextHundller}
+                        />
+                    </View>
+
+
+                    <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
+                    <View style={[styles.button, styles.background]}>
+                        <FlatButton text={useLocale({}, "goToSignUp")} bgrColor="#CCA4FB" onPress={() => {
+                            navigation.navigate("SignUpScreen")
+                        }} />
+                    </View>
+
+
+                </ View>
+            ),
+            Verifyier: checkPhone,
+            Submit: async () => true
+
+        },
+        {//2 email
+            Component: (nextHundller, backHundller, finshHundller) =>
+            (
+                <View style={[
+                    styles.background,
+                    styles.flex1,
+                    styles.center
+                ]}>
+                    <Text style={styles.topLabel2} > {useLocale({}, "emailScreen")}</Text>
+
+                    <View style={[styles.center, styles.background]}>
+                        <InputWithLabel
+                            keyboadType='email-address'
+                            errorMessage={""}
+                            label={useLocale({}, "emailLabel")}
+                            setValue={(value: string) => setEmail(value.trim())}
+                            value={email.trim()}
+                            placeholder={useLocale({}, "emailLabel")}
+                        />
+                        <Text style={{ color: 'red', fontSize: FontSize.Small }}>{emailErrorMessage}</Text>
+
+                    </View>
+
+
+                    <View style={[
+                        styles.background,
+                        styles.rowFlex,
+                        styles.spaceBetween
+                    ]}>
+                        <TouchableOpacity onPress={() => {
+                            setPhoneErrorMessage("")
+
+                        }}>
+                            <IconButton size={FontSize.xxxxxxxxxLarge} locked name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
+                        </TouchableOpacity>
+
+
+                        <IconButton
+                            size={FontSize.xxxxxxxxxLarge}
+                            locked
+                            name={useLocale({}, "direction") == "rtl" ? "chevron-circle-left" : "chevron-circle-right"}
+                            onClick={nextHundller}
+                        />
+                    </View>
+
+
+
+
+                    <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
+                    <View style={[styles.button, styles.background]}>
+                        <FlatButton text={useLocale({}, "goToSignUp")} bgrColor="#CCA4FB" onPress={() => {
+                            navigation.navigate("SignUpScreen")
+                        }} />
+                    </View>
+
+                </View>),
+            Verifyier: async () => true,//checkEmail,
+            Submit: async () => true
+
+
+        },
+        {//3 password
+            Component: (nextHundller, backHundller, finshHundller) =>
+            (
+                <View style={[
+                    styles.background,
+                    styles.flex1,
+                    styles.center
+                ]}>
+                    <Text style={styles.topLabel4} > {useLocale({}, "passwordScreen")}</Text>
+
+                    <View style={[styles.center, styles.background]}>
+                        <InputWithLabel
+                            errorMessage={""}
+                            label={useLocale({}, "PasswadLabel")}
+                            setValue={(value: string) => setPassward(value.trim())}
+                            value={passward.trim()}
+                            secureTextEntry={true}
+                            placeholder={useLocale({}, "PasswadLabel")}
+                        />
+                        <Text style={{ color: 'red', fontSize: FontSize.Small }}>{passwardErrorMessage}</Text>
+
+
+                    </View>
+                    <View style={[
+                        styles.background,
+                        styles.rowFlex,
+                        styles.spaceBetween
+                    ]}>
+                        <TouchableOpacity onPress={() => setEmailErrorMessage("")}>
+                            <IconButton size={FontSize.xxxxxxxxxLarge}  name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
+                        </TouchableOpacity>
+
+                        <IconButton size={FontSize.xxxxxxxxxLarge}  willDie name="check-circle" onClick={finshHundller} />
+                    </View>
+
+
+
+                    <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
+                    <View style={[styles.button, styles.background]}>
+                        <FlatButton text={useLocale({}, "goToSignUp")} bgrColor="#CCA4FB" onPress={() => {
+                            navigation.navigate("SignUpScreen")
+                        }} />
+                    </View>
+                </View>
+
+
+            ),
+            Verifyier: async () => true,
+            Submit: checkPassward
+        }
+
+    ];
+
+
+
+
+    //TODO:
+    if (loaded == false) {
+        return <Loading onStart={tokenSignIn} onFinish={manageTokenSignIn} />
+    } else {
+        return (
+            <View style={[
+                styles.background,
+                styles.container,
+                styles.flex1
+            ]}>
+                <View style={[styles.background]}>
+                    <Text style={styles.titleText}>{useLocale({}, "signingInHeader")}</Text>
+                </View>
+
+
+                <StagesLayout Stages={Stages} onFinish={onSuccess} />
+
+            </View>
+        )
+    }
+
+
+}
+
+

@@ -1,0 +1,4 @@
+type StoreParamList = {
+StoreMainScreen:undefined;
+    
+};

@@ -1,0 +1,6 @@
+type CheckSmsData = {
+    phone: boolean;
+  };
+  
+  
+  

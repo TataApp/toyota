@@ -1,0 +1,3 @@
+type CheckPhoneData = {
+  exists: boolean;
+};
