@@ -2373,7 +2373,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
 
 
 
-                        <Text style={{ marginLeft: 20, fontSize: 18, marginTop: 30, color: 'black' }}>{useLocale({}, 'PayCash1')}</Text>
+                        <Text style={{ marginLeft: 20, fontSize: 18, marginTop: 70, color: 'black' }}>{useLocale({}, 'PayCash1')}</Text>
 
                         {moveMyOffice || moveMyHouse &&
                             <View>   <Text style={{ marginLeft: 20, fontSize: 17, marginTop: 60, color: 'black' }}>{useLocale({}, 'PayCash2')}</Text>
@@ -2391,7 +2391,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
 
 
 
-                        <View style={{ alighnItem: 'center', flexDirection: 'row', paddingTop: 180, backgroundColor: "#f2f2f7" }}>
+                        <View style={{ alighnItem: 'center', flexDirection: 'row', paddingTop: 290, backgroundColor: "#f2f2f7" }}>
                             <View style={{ flexDirection: 'row', marginTop: 30, backgroundColor: '#f2f2f7' }}>
                                 {/*Contract  */}
                                 <TouchableOpacity onPress={() => {

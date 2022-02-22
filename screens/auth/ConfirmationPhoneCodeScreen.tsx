@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     paddingRight: 60,
     paddingLeft: 60
   }, changePhoneTitle: {
-    fontSize: 11,
+    fontSize: 15,
     fontWeight: 'bold',
     color: 'white',
     // marginLeft: 40,
@@ -340,20 +340,7 @@ const ConfirmationPhoneCodeScreen = ({ route, navigation }: any) => {
 
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <ModalPoup visible={phoneVisible}>
-          <View style={{ alignItems: 'center' }}>
-            <View style={styles.header}>
-              <TouchableOpacity onPress={() => {
-                setPhoneVisible(false)
-              }}>
-                <Image
-                  source={require('../../assets/images/x.png')}
-                  style={{ height: 30, width: 30 }}
-
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-
+        
           <View style={{ marginLeft: 30, marginTop: 10, backgroundColor: "#ffff" }}>
             <InputWithLabel
               mode='outlined'
@@ -397,7 +384,7 @@ const ConfirmationPhoneCodeScreen = ({ route, navigation }: any) => {
       />
 
 
-      <Text style={{ marginLeft: 10, marginTop: 20, fontSize: 16 }}>{useLocale({}, ('verification2'))}</Text>
+      <Text style={{ marginLeft: 10, marginTop: 12, fontSize: 16 }}>{useLocale({}, ('verification2'))}</Text>
 
       <CodeField
         ref={ref}
