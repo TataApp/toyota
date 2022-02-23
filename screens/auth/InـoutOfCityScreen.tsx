@@ -149,7 +149,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
 
 
 
-  
+
     const [phoneErrorMessage, setPhoneErrorMessage] = useState<string>('');
     const [fromWhereAddressDetails, setfromWhereAddressDetails] = useState('');
     const [toWhereAddressDetails, settoWhereAddressDetails] = useState('');
@@ -745,7 +745,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
         }
     })
 
-    
+
 
 
     //#region 
@@ -1031,7 +1031,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
 
 
 
-  // Send Trip infomation to database
+    // Send Trip's infomation to database
     const AddTrip = async (): Promise<boolean> => {
 
         var randomIdForTrip = Math.floor(Math.random() * 10000);
@@ -1146,7 +1146,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
         longitude: -122.4324,
     });
 
-
+ // the small screen that poup
     const [visible, setVisible] = React.useState(false);
     const ModalPoup = ({ visible, children }) => {
         const [showModal, setShowModal] = React.useState(visible);
@@ -2028,7 +2028,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
             Verifyier: async () => true,
             Submit: async () => true
         },
-        {//6 helpers
+        {//  6 Helpers
             Component: (nextHundller, doubleNextHundller, doubleBackHundler, backHundller, finshHundller) => (
                 <View style={[
                     styles.flex1,
@@ -2127,7 +2127,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
 
 
         },
-        { // 7 price
+        { // 7 Price
             Component: (nextHundller, doubleNextHundller, doubleBackHundler, backHundller, finshHundller) =>
             (
                 <View style={[
@@ -2206,7 +2206,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
             Verifyier: async () => true,
             Submit: async () => true
         },
-        { // 8
+        { // 8 Review trip details
             Component: (nextHundller, doubleNextHundller, doubleBackHundler, backHundller, finshHundller) =>
             (
                 <View style={[
@@ -2326,7 +2326,7 @@ export default function InـoutOfCityScreen({ navigation }: any) {
             Verifyier: async () => true,
             Submit: async () => true
         },
-        { // 9
+        { // 9 accepet condition
             Component: (nextHundller, doubleNextHundller, doubleBackHundler, backHundller, finshHundller) =>
             (
 
@@ -2376,7 +2376,8 @@ export default function InـoutOfCityScreen({ navigation }: any) {
                         <Text style={{ marginLeft: 20, fontSize: 18, marginTop: 70, color: 'black' }}>{useLocale({}, 'PayCash1')}</Text>
 
                         {moveMyOffice || moveMyHouse &&
-                            <View>   <Text style={{ marginLeft: 20, fontSize: 17, marginTop: 60, color: 'black' }}>{useLocale({}, 'PayCash2')}</Text>
+                            <View style={ {backgroundColor: '#f2f2f7'} }>
+                                <Text style={{ marginLeft: 20, fontSize: 17, marginTop: 60, color: 'black' }}>{useLocale({}, 'PayCash2')}</Text>
                                 <View style={{ marginLeft: 20, marginRight: 20, backgroundColor: '#f2f2f7' }}>
                                     <TextInput
                                         label={useLocale({}, ('yourNote'))}
@@ -2387,7 +2388,9 @@ export default function InـoutOfCityScreen({ navigation }: any) {
                                         onChangeText={text => setitemsDetails(text)}
                                     />
                                 </View>
-                            </View>}
+                            </View>
+                            
+                            }
 
 
 

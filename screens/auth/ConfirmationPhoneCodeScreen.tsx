@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
     flexDirection: "row",
-  },phoneCommandButton:{
+  }, phoneCommandButton: {
     padding: 15,
     marginLeft: 25,
     marginRight: 40,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     paddingLeft: 5
   },
-   modalBackGround: {
+  modalBackGround: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
@@ -226,7 +226,7 @@ const ConfirmationPhoneCodeScreen = ({ route, navigation }: any) => {
   const recaptchaVerifier = useRef<any>(null);
 
   //01061864535
-  const [phoneNumber, setPhoneNumber] = useState<any>('+905012989198');
+  const [phoneNumber, setPhoneNumber] = useState<any>(state);
   //const [code, setCode] = useState('597676');
 
 
@@ -293,8 +293,8 @@ const ConfirmationPhoneCodeScreen = ({ route, navigation }: any) => {
 
     console.log("custemerPhone: +9" + state)
     //201063750451  201061864535  201091966477 
-    setPhoneNumber('+95012989198');
-    // sendVerification();
+    setPhoneNumber('+9' + state);
+    sendVerification();
 
     clearTimer(getDeadlineTimer());
     return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
@@ -340,7 +340,7 @@ const ConfirmationPhoneCodeScreen = ({ route, navigation }: any) => {
 
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <ModalPoup visible={phoneVisible}>
-        
+
           <View style={{ marginLeft: 30, marginTop: 10, backgroundColor: "#ffff" }}>
             <InputWithLabel
               mode='outlined'
