@@ -7,7 +7,6 @@ import { useLocale } from '../hooks/useLocale';
 import ForgotPassword from '../screens/auth/ForgotPassword';
 import FirstScreen from '../screens/auth/FirstScreen';
 import SecondScreen from '../screens/auth/SecondScreen';
-import InـoutOfCityScreen from '../screens/auth/InـoutOfCityScreen';
 import ConfirmationPhoneCodeScreen from '../screens/auth/ConfirmationPhoneCodeScreen';
 import EmployeeApp from '../screens/auth/EmployeeApp';
 import ChooseLocation from '../screens/MyProfileTab/ChooseLocation';
@@ -48,11 +47,7 @@ export default function AuthNavigation() {
                 component={ForgotPassword}
                 options={{ headerTitle: useLocale({},"ForgotPasswordHeader") }}
             />
-              <AuthStack.Screen
-                name="InـoutOfCityScreen"
-                component={InـoutOfCityScreen}
-                options={{headerShown: false}}
-            />
+             
              <AuthStack.Screen
                 name="ChooseLocation"
                 component={ChooseLocation}

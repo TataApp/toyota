@@ -1074,32 +1074,7 @@ export default function MainScreen({ navigation }: any) {
     //#endregion
 
 
-    // const TripServics = () => {
-    //     console.log("TripServics   fun")
-
-    //     console.log("moveMyHouse: " + moveMyHouse)
-    //     console.log("TripServis: " + TripServis)
-    //     if (moveMyHouse == true) {
-    //         // setTripServis(PrevTripServis => PrevTripServis + 1)
-    //         setTripServis(1);
-    //         console.log("TripServis after: " + TripServis)
-    //     }
-
-
-    //     console.log("moveMyStuff: " + moveMyStuff)
-    //     console.log("TripServis: " + TripServis)
-    //     if (moveMyStuff == true) {
-    //         setTripServis(2)
-    //     }
-
-    //     console.log("moveMyOffice: " + moveMyOffice)
-    //     console.log("TripServis: " + TripServis)
-
-    //     if (moveMyOffice == true) {
-    //         setTripServis(3)
-    //     }
-
-    // }
+    
 
     const AddTrip = async (): Promise<boolean> => {
 
@@ -2696,7 +2671,7 @@ export default function MainScreen({ navigation }: any) {
                         )}
 
 
-                        <View style={{ alighnItem: 'center', flexDirection: 'row', paddingTop: 100, backgroundColor: "#f2f2f7" }}>
+                        <View style={{ alighnItem: 'center', flexDirection: 'row', paddingTop: 250, backgroundColor: "#f2f2f7" }}>
                             <View style={{ flexDirection: 'row', marginTop: 30, backgroundColor: '#f2f2f7' }}>
                                 {/*Contract  */}
                                 <TouchableOpacity onPress={() => {

@@ -58,23 +58,17 @@ export default  function SecondScreen({ navigation }: { navigation: StackNavigat
             />
 
             <View style={styles.button}>
-                <FlatButton text={useLocale({}, "secondScreen3")} bgrColor="#9273CB" onPress={() => {
+                <FlatButton text={useLocale({}, "secondScreen3")} bgrColor="#37B8BB" onPress={() => {
                     navigation.navigate('SignInScreen')
                 }} />
             </View>
             <View style={styles.button}>
-                <FlatButton text={useLocale({}, "secondScreen4")} bgrColor="#CCA4FB" onPress={() => {
+                <FlatButton text={useLocale({}, "secondScreen4")} bgrColor="#3DCCC0" onPress={() => {
                     navigation.navigate("SignUpScreen")
                 }} />
             </View>
 
-            <View>
-                {/* 5031C2 */}
-                <TouchableOpacity style={styles.commandButton} onPress={() => navigation.navigate('InـoutOfCityScreen')} >
-                    <Text style={styles.panelButtonTitle}>{useLocale({}, 'HesapsızDevamEt')}</Text>
-                    <FontAwesome style={{ marginLeft: 15 }} name={"chevron-right"} color={"#ffff"} size={FontSize.Regular}></FontAwesome>
-                </TouchableOpacity>
-            </View>
+            
 
 
 
