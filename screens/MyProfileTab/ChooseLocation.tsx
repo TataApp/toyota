@@ -9,6 +9,7 @@ import { showError, showSuccess } from '../helper/helperFunction';
 import { useLocale } from '../../hooks/useLocale';
 
 export default function ChooseLocation(props:any) {
+    
     const navigation = useNavigation()
     const [state, setState] = useState({
         pickupCords:{},

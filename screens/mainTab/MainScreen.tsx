@@ -187,6 +187,7 @@ export default function MainScreen({ navigation }: any) {
     const [miniKamyon, setminiKamyon] = useState(false);
     const [largeKamyon, setlargeKamyon] = useState(false);
     const [XlargeKamyon, setXlargeKamyon] = useState(false);
+
     const [backgroundCheck, setbackgroundCheck] = useState("#D3D3D3");
     const [backgroundCheck1, setbackgroundCheck1] = useState("#D3D3D3");
     const [backgroundCheck2, setbackgroundCheck2] = useState("#D3D3D3");
@@ -1145,6 +1146,7 @@ export default function MainScreen({ navigation }: any) {
         setbackgroundCheck2("#5031c2");
         navigation.navigate('ChooseLocation', { getCordinates: fetchValue })
         //  navigation.navigate('ChooseLocation')
+        
     }
 
     const calculatePrice = (distance: any, helpers: any) => {
