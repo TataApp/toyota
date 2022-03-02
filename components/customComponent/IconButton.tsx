@@ -30,7 +30,7 @@ export default function IconButton(props: { name: Icon, onClick: () => Promise<v
     return (
         <TouchableOpacity onPress={hundlePressing} disabled={running}>
             <View style={styles.container}>
-                <FontAwesome  color={running?useThemeColor({},"mor"):useThemeColor({},"mor")} {...props} />
+                <FontAwesome  color={running?useThemeColor({},"green1"):useThemeColor({},"green1")} {...props} />
             </View>
         </TouchableOpacity>
 

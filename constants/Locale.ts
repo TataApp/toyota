@@ -147,7 +147,8 @@ export default {
     EnterDistinationLocation:"Enter Distination Location",
     Done:"Done",
     Distance:"Distance",
-
+    truckTipe:"Kamyon tipinizi seçin",
+    plateNumber:"Plaka numarası",
 
     
 
@@ -328,6 +329,9 @@ export default {
     EnterDistinationLocation:"أدخل موقع الوجهة",
     Done:"تمام",
     Distance:"المسافة",
+    truckTipe:"Kamyon tipinizi seçin",
+    plateNumber:"plaka numarası",
+
 
 
 
@@ -523,17 +527,8 @@ export default {
     EnterDistinationLocation:"Hedef Konumu Giriniz",
     Done:"Tamam",
     Distance:"Mesafe",
-
-
-
-
-
-
-
-
-
-
-
+    truckTipe:"Kamyon tipinizi seçin",
+    plateNumber:"Plaka numarası",
 
 
   },

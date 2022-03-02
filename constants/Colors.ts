@@ -14,6 +14,7 @@ export default {
     gri:"#939492",
     mor:"#5031C2",
     green:"#28AC37",
+    green1:"#299195",
     red:"#D52D3A"
   },
   dark: {
@@ -28,6 +29,7 @@ export default {
     gri:"#939492",
     mor:"#5031C2",
     green:"#28AC37",
+    green1:"#299195",
     red:"#D52D3A"
 
 

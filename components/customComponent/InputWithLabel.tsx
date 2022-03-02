@@ -50,7 +50,7 @@ export default function InputWithLabel(
         <View style={styles.inputComponentContainer}>
             <Text style={{color:'black'}}>{label}</Text>
             {errorMessage.length > 0 ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
-            <TextInput mode={mode} keyboardType={keyboadType} secureTextEntry={secureTextEntry}  label={placeholder}  value={value} onChangeText={setValue} />
+            <TextInput theme={{ colors: { primary: '#299195',underlineColor:'#299195',}}} selectionColor={"#299195"} outlineColor={"#299195"}  mode={mode} keyboardType={keyboadType} secureTextEntry={secureTextEntry}  label={placeholder}  value={value} onChangeText={setValue} />
         </View>
     )
 }
