@@ -52,7 +52,7 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="MainTab"
       tabBarOptions={{
-         activeTintColor: useThemeColor({}, "mor"),
+         activeTintColor: useThemeColor({}, "green1"),
          style: {
           backgroundColor: 'white',//color you want to change
         }

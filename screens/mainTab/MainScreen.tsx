@@ -18,6 +18,8 @@ import { showError, showSuccess } from '../helper/helperFunction';
 import { AsyncStorage } from 'react-native';
 import { AntDesign, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { FontSize } from '../../constants/FontSize';
+import { color } from 'react-native-reanimated';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -38,9 +40,18 @@ export default function MainScreen({ navigation }: any) {
 
 
     const [trips, setTrips,] = useState([
-        { fromWhere: "Sakarya", toWhere: "Istanbul", kilometers: "450km", label: 'Sakarya', key: "1" },
-        { fromWhere: "Sakarya", toWhere: "Istanbul", kilometers: "450km", label: 'Istanbul', key: "2" },
-        { fromWhere: "Sakarya", toWhere: "Istanbul", kilometers: "450km", label: 'ttt', key: "3" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "1" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "2" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "3" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "4" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "5" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "6" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "7" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "8" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "9" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "10" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "11" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "12" },
     ]);
 
 
@@ -66,7 +77,21 @@ export default function MainScreen({ navigation }: any) {
         }, separator: {
             borderBottomColor: '#c7c7c7',
             borderBottomWidth: 1,
-
+        }, square: {
+            width: 80,
+            height: 80,
+            borderColor: "#39A1A3",
+            borderWidth: 1,
+            borderRadius: 20,
+            // borderTopRightRadius: 30,
+            marginBottom: 10,
+            marginLeft: 20,
+            marginTop: 5,
+            flexDirection: 'row',
+            backgroundColor: "#39A1A3",
+            justifyContent: "center",
+            // alignContent:"center",
+            alignItems: "center"
 
 
         }
@@ -109,35 +134,55 @@ export default function MainScreen({ navigation }: any) {
 
             <View style={{ flexDirection: 'row', backgroundColor: '#ffff' }}>
                 <Image
-                    style={{ marginLeft: 15, marginBottom: 15, marginTop: 15, width: 140, height: 34 }}
+                    style={{ marginLeft: 15, marginBottom: 15, marginTop: 15, width: 170, height: 34 }}
                     source={require('../../assets/images/logo3.png')}
                 />
             </View>
+            <View style={styles.separator}></View>
 
             <FlatList
                 data={trips}
                 // ItemSeparatorComponent = {itemSeprator}
                 renderItem={({ item }) => (
                     <View>
-                        <View style={{ flexDirection: "row" }}>
-                            <Text style={{ marginLeft: 40, fontSize: 20 }}>{item.fromWhere}</Text>
-                            <Text style={{ marginLeft: 40,marginTop:10, fontSize: 12 }}>{item.kilometers}</Text>
-                            <Text style={{ marginLeft: 40, fontSize: 20 }}>{item.toWhere}</Text>
-                        </View>
-                        
-                        <View style={{ flexDirection: "row" }}>
-                            <FontAwesome style={{ marginLeft: 65, marginRight: 5, marginTop: 5 }} color="#4dd404" size={FontSize.Regular} name={"circle"} />
-                            <View style={{
-                                borderBottomColor: '#c7c7c7',
-                                borderBottomWidth: 4,
-                                width: "40%",
-                                marginBottom: 5,
 
-                            }} />
-                            <AntDesign style={{ marginTop: 3 }} name="caretright" size={FontSize.Large} color="#FF0000" />
-                        
-                        </View>
-                        <View style={styles.separator}></View>
+                        <TouchableOpacity style={{ flexDirection: "row" }}>
+                            <View>
+                                <View style={{ flexDirection: "row" }}>
+                                    <Text style={{ marginLeft: 20, fontSize: 20 }}>{item.cityFromWhere}</Text>
+                                    <Text style={{ marginLeft: 20, marginTop: 10, fontSize: 12 }}>{item.kilometers}</Text>
+                                    <Text style={{ marginLeft: 40, fontSize: 20 }}>{item.cityToWhere}</Text>
+                                </View>
+
+                                <View style={{ flexDirection: "row" }}>
+                                    <FontAwesome style={{ marginLeft: 40, marginRight: 5, marginTop: 5 }} color="#2AD7B4" size={FontSize.Regular} name={"circle"} />
+                                    <View style={{
+                                        borderBottomColor: '#c7c7c7',
+                                        borderBottomWidth: 4,
+                                        width: "50%",
+                                        marginBottom: 5,
+
+                                    }} />
+                                    <AntDesign style={{ marginTop: 3 }} name="caretright" size={FontSize.Large} color="#FF0000" />
+
+                                </View>
+
+                                <View style={{ flexDirection: "row" }}>
+                                    <Text style={{ marginLeft: 20, fontSize: 20, color: "#7B7B7B" }}>{item.regionFromWhere}</Text>
+                                    <Text style={{ marginLeft: 0, fontSize: 15, marginTop: 20, color: "black" }}>{item.truckType}</Text>
+
+                                    <Text style={{ marginLeft: 0, fontSize: 20, color: "#7B7B7B", marginBottom: 10 }}>{item.regionToWhere}</Text>
+                                </View>
+
+
+                            </View>
+
+                            <View style={styles.square} >
+                                <Text style={{ fontSize: 20, color: "#ffff", fontWeight: "700" }}>{item.price} TL</Text>
+                            </View>
+
+                        </TouchableOpacity>
+                        <View style={styles.separator} />
                     </View>
                 )}
             />
