@@ -31,8 +31,9 @@ import { showError } from '../helper/helperFunction';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../../state/action-creators';
 import { useDispatch } from 'react-redux';
-// import AsyncStorage from '@react-native-community/async-storage';
 import { AsyncStorage } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -66,6 +67,7 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
 
         }, newUser: {
             paddingBottom: 10,
+            marginLeft: 100,
             color: "#736e6e",
             fontWeight: "bold"
 
@@ -128,6 +130,43 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
         }, background: {
             backgroundColor: '#ffff',
         },
+        commandButtonSmall: {
+            padding: 15,
+            marginLeft: 10,
+            paddingRight: 20,
+            marginRight: 5,
+            marginBottom: 0,
+            borderRadius: 12,
+            backgroundColor: '#39A1A3',
+            alignItems: 'center',
+
+            flexDirection: "row",
+        }, commandButton3: {
+            padding: 15,
+            marginLeft: 8,
+            marginRight: 30,
+            marginBottom: 0,
+            borderRadius: 12,
+            borderColor: '#39A1A3',
+            borderWidth: 1,
+            backgroundColor: "#39A1A3",
+            alignItems: 'center',
+
+            flexDirection: "row",
+        }, panelButtonTitle: {
+            fontSize: 17,
+            fontWeight: 'bold',
+            color: 'white',
+            marginLeft: 35,
+            paddingRight: 60,
+            paddingLeft: 60
+        }, SignOut: {
+            paddingBottom: 10,
+            marginLeft: 90,
+            color: "#39A1A3",
+            fontWeight: "bold"
+
+        }
     })
 
     const [email, setEmail] = useState<string>('');
@@ -206,33 +245,6 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
     }
 
 
-    // const checkPhone = async (): Promise<boolean> => {
-
-    //     console.log(phoneErrorMessage);
-    //     setPhoneErrorMessage( "invalidPhone")
-    //     let result: boolean = true;
-
-    //     if (validator.isMobilePhone(phone, 'tr-TR') == false) {
-    //        setPhoneErrorMessage(useLocalErrorMessage({}, "invalidPhone"))
-    //         result = false;
-    //     }
-
-
-    //     if (result == false)
-    //         return false;
-
-    //     let responsePhone = await checkPhoneService(phone);
-
-    //     console.log(responsePhone.data.exists);
-
-    //     if (responsePhone.data.exists == false) {
-    //         setPhoneErrorMessage(useLocalErrorMessage({}, "phoneDoesNotExist"))
-    //         return false;
-    //     }
-
-    //     return result;
-    // }
-
 
 
 
@@ -309,48 +321,58 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
                     styles.flex1,
                     styles.center
                 ]}>
+                    <ScrollView>
 
-                    <Text style={styles.topLabel2} > {useLocale({}, "phoneScreen")}</Text>
+                        <Text style={styles.topLabel2} > {useLocale({}, "phoneScreen")}</Text>
 
-                    <View style={[styles.center2, styles.background]}>
-                        <InputWithLabel
-                            keyboadType='number-pad'
-                            errorMessage={""}
-                            label={useLocale({}, "PhoneLabel")}
-                            setValue={(value: string) => setPhone(value.trim())}
-                            value={phone.trim()}
-                            placeholder={useLocale({}, "PhonelLabel")}
-                        />
+                        <View style={[styles.center2, styles.background]}>
+                            <InputWithLabel
+                                keyboadType='number-pad'
+                                errorMessage={""}
+                                label={useLocale({}, "PhoneLabel")}
+                                setValue={(value: string) => setPhone(value.trim())}
+                                value={phone.trim()}
+                                mode={"outlined"}
+                                placeholder={useLocale({}, "PhoneLabel")}
+                            />
+                        </View>
+                        <Text style={{ color: 'red', fontSize: FontSize.Small }}>{phoneErrorMessage}</Text>
+
+
+                        <View style={{ marginLeft: 15 }}>
+                            <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
+
+                            <TouchableOpacity>
+                                <Text style={styles.SignOut} onPress={() => {
+                                    navigation.navigate('SignUpScreen')
+                                }}>{useLocale({}, "goToSignUp")}</Text>
+                            </TouchableOpacity>
+                        </View>
+
+
+                    </ScrollView>
+
+
+                    <View style={{ flexDirection: "row", marginTop: 10, backgroundColor: '#ffff' }}>
+
+                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => backHundller()} >
+                            <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+                        </TouchableOpacity>
+
+
+                        <TouchableOpacity style={styles.commandButton3} onPress={() => {
+                            nextHundller()
+
+                        }} >
+                            <Text style={styles.panelButtonTitle}>{useLocale({}, 'continue')}</Text>
+                            <FontAwesome style={{ marginLeft: 5 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+
+                        </TouchableOpacity>
                     </View>
-                    <Text style={{ color: 'red', fontSize: FontSize.Small }}>{phoneErrorMessage}</Text>
-
-
-                    <View style={[
-                        styles.background,
-                        styles.rowFlex,
-                        styles.spaceBetween
-                    ]}>
-                        <IconButton size={FontSize.xxxxxxxxxLarge} locked name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
-                        <IconButton
-                            size={FontSize.xxxxxxxxxLarge}
-                            locked
-                            name={useLocale({}, "direction") == "rtl" ? "chevron-circle-left" : "chevron-circle-right"}
-                            onClick={nextHundller}
-                        />
-                    </View>
-
-
-                    <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
-                    <View style={[styles.button, styles.background]}>
-                        <FlatButton text={useLocale({}, "goToSignUp")} bgrColor="#CCA4FB" onPress={() => {
-                            navigation.navigate("SignUpScreen")
-                        }} />
-                    </View>
-
 
                 </ View>
             ),
-            Verifyier: checkPhone,
+            Verifyier: async () => true,// checkPhone,
             Submit: async () => true
 
         },
@@ -362,23 +384,58 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
                     styles.flex1,
                     styles.center
                 ]}>
-                    <Text style={styles.topLabel2} > {useLocale({}, "emailScreen")}</Text>
 
-                    <View style={[styles.center, styles.background]}>
-                        <InputWithLabel
-                            keyboadType='email-address'
-                            errorMessage={""}
-                            label={useLocale({}, "emailLabel")}
-                            setValue={(value: string) => setEmail(value.trim())}
-                            value={email.trim()}
-                            placeholder={useLocale({}, "emailLabel")}
-                        />
-                        <Text style={{ color: 'red', fontSize: FontSize.Small }}>{emailErrorMessage}</Text>
+                    <ScrollView>
+                        <Text style={styles.topLabel2} > {useLocale({}, "emailScreen")}</Text>
 
+                        <View style={[styles.center, styles.background]}>
+                            <InputWithLabel
+                                keyboadType='email-address'
+                                errorMessage={""}
+                                label={useLocale({}, "emailLabel")}
+                                setValue={(value: string) => setEmail(value.trim())}
+                                value={email.trim()}
+                                mode={"outlined"}
+                                placeholder={useLocale({}, "emailLabel")}
+                            />
+                            <Text style={{ color: 'red', fontSize: FontSize.Small }}>{emailErrorMessage}</Text>
+
+                        </View>
+
+
+
+                        <View style={{ marginLeft: 15 }}>
+                            <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
+
+                            <TouchableOpacity>
+                                <Text style={styles.SignOut} onPress={() => {
+                                    navigation.navigate('SignUpScreen')
+                                }}>{useLocale({}, "goToSignUp")}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+
+
+
+                    <View style={{ flexDirection: "row", marginTop: 10, backgroundColor: '#ffff' }}>
+
+                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => backHundller()} >
+                            <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+                        </TouchableOpacity>
+
+
+                        <TouchableOpacity style={styles.commandButton3} onPress={() => {
+                            nextHundller()
+
+                        }} >
+                            <Text style={styles.panelButtonTitle}>{useLocale({}, 'continue')}</Text>
+                            <FontAwesome style={{ marginLeft: 5 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+
+                        </TouchableOpacity>
                     </View>
 
 
-                    <View style={[
+                    {/* <View style={[
                         styles.background,
                         styles.rowFlex,
                         styles.spaceBetween
@@ -397,17 +454,17 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
                             name={useLocale({}, "direction") == "rtl" ? "chevron-circle-left" : "chevron-circle-right"}
                             onClick={nextHundller}
                         />
-                    </View>
+                    </View> */}
 
 
 
 
-                    <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
+                    {/* <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
                     <View style={[styles.button, styles.background]}>
                         <FlatButton text={useLocale({}, "goToSignUp")} bgrColor="#CCA4FB" onPress={() => {
                             navigation.navigate("SignUpScreen")
                         }} />
-                    </View>
+                    </View> */}
 
                 </View>),
             Verifyier: async () => true,//checkEmail,
@@ -423,41 +480,77 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
                     styles.flex1,
                     styles.center
                 ]}>
-                    <Text style={styles.topLabel4} > {useLocale({}, "passwordScreen")}</Text>
 
-                    <View style={[styles.center, styles.background]}>
-                        <InputWithLabel
-                            errorMessage={""}
-                            label={useLocale({}, "PasswadLabel")}
-                            setValue={(value: string) => setPassward(value.trim())}
-                            value={passward.trim()}
-                            secureTextEntry={true}
-                            placeholder={useLocale({}, "PasswadLabel")}
-                        />
-                        <Text style={{ color: 'red', fontSize: FontSize.Small }}>{passwardErrorMessage}</Text>
+                    <ScrollView>
+
+                        <Text style={styles.topLabel4} > {useLocale({}, "passwordScreen")}</Text>
+
+                        <View style={[styles.center, styles.background]}>
+                            <InputWithLabel
+                                errorMessage={""}
+                                label={useLocale({}, "PasswadLabel")}
+                                setValue={(value: string) => setPassward(value.trim())}
+                                value={passward.trim()}
+                                mode={"outlined"}
+                                secureTextEntry={true}
+
+                                placeholder={useLocale({}, "PasswadLabel")}
+                            />
+                            <Text style={{ color: 'red', fontSize: FontSize.Small }}>{passwardErrorMessage}</Text>
 
 
+                        </View>
+
+                        <View style={{ marginLeft: 15 }}>
+                            <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
+
+                            <TouchableOpacity>
+                                <Text style={styles.SignOut} onPress={() => {
+                                    navigation.navigate('SignUpScreen')
+                                }}>{useLocale({}, "goToSignUp")}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+
+
+
+                    <View style={{ flexDirection: "row", marginTop: 10, backgroundColor: '#ffff' }}>
+
+                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => backHundller()} >
+                            <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+                        </TouchableOpacity>
+
+
+                        <TouchableOpacity style={styles.commandButton3} onPress={() => {
+                            finshHundller()
+
+                        }} >
+                            <Text style={styles.panelButtonTitle}>{useLocale({}, 'continue')}</Text>
+                            <FontAwesome style={{ marginLeft: 5 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+
+                        </TouchableOpacity>
                     </View>
-                    <View style={[
+
+                    {/* <View style={[
                         styles.background,
                         styles.rowFlex,
                         styles.spaceBetween
                     ]}>
                         <TouchableOpacity onPress={() => setEmailErrorMessage("")}>
-                            <IconButton size={FontSize.xxxxxxxxxLarge}  name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
+                            <IconButton size={FontSize.xxxxxxxxxLarge} name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
                         </TouchableOpacity>
 
-                        <IconButton size={FontSize.xxxxxxxxxLarge}  willDie name="check-circle" onClick={finshHundller} />
-                    </View>
+                        <IconButton size={FontSize.xxxxxxxxxLarge} willDie name="check-circle" onClick={finshHundller} />
+                    </View> */}
 
 
 
-                    <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
+                    {/* <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
                     <View style={[styles.button, styles.background]}>
                         <FlatButton text={useLocale({}, "goToSignUp")} bgrColor="#CCA4FB" onPress={() => {
                             navigation.navigate("SignUpScreen")
                         }} />
-                    </View>
+                    </View> */}
                 </View>
 
 

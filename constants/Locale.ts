@@ -149,27 +149,9 @@ export default {
     Distance:"Distance",
     truckTipe:"Kamyon tipinizi seçin",
     plateNumber:"Plaka numarası",
+    truckAddress:"Kamyon adresiniz",
 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -331,45 +313,7 @@ export default {
     Distance:"المسافة",
     truckTipe:"Kamyon tipinizi seçin",
     plateNumber:"plaka numarası",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+    truckAddress:"Kamyon adresiniz",
 
 
 
@@ -529,7 +473,7 @@ export default {
     Distance:"Mesafe",
     truckTipe:"Kamyon tipinizi seçin",
     plateNumber:"Plaka numarası",
-
+    truckAddress:"Kamyon adresiniz",
 
   },
 

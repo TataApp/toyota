@@ -204,6 +204,12 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
             color: "#736e6e",
             fontWeight: "bold"
 
+        }, SignIn: {
+            paddingBottom: 10,
+            marginLeft: 120,
+            color: "#39A1A3",
+            fontWeight: "bold"
+
         }, newUserLast: {
             paddingBottom: 10,
             marginLeft: 100,
@@ -428,38 +434,18 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         </View>
 
 
-                       
 
-                            {/* <IconButton size={FontSize.xxxxxxxxxLarge} locked name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} /> */}
-                            {/* <TouchableOpacity style={styles.circle} onPress={() => {
-                                if (name !== "") {
-                                    nextHundller
-                                } else {
-                                    showError("Güzel adını bilmek istiyoruz")
-                                }
-                            }}>
-                                <FontAwesome name="chevron-left" size={35} color="#ffff" />
+
+
+
+                        <View style={{ marginLeft: 15 }}>
+                            <Text style={styles.newUser}>{useLocale({}, "oldUser")}</Text>
+
+                            <TouchableOpacity>
+                                <Text style={styles.SignIn} onPress={() => {
+                                    navigation.navigate('SignInScreen')
+                                }}>{useLocale({}, "secondScreen3")}</Text>
                             </TouchableOpacity>
-
-                            <TouchableOpacity style={styles.circle} onPress={() => {
-                                if (name !== "") {
-                                    nextHundller()
-                                } else {
-                                    showError("Güzel adını bilmek istiyoruz")
-                                }
-                            }}>
-                                <FontAwesome name="chevron-right" size={35} color="#ffff" />
-
-                            </TouchableOpacity> */}
-
-                        
-                        
-
-                        <Text style={styles.newUser}>{useLocale({}, "oldUser")}</Text>
-                        <View style={styles.button1}>
-                            <FlatButton text={useLocale({}, "secondScreen3")} bgrColor="#37B8BB" onPress={() => {
-                                navigation.navigate('SignInScreen')
-                            }} />
                         </View>
 
 
@@ -499,13 +485,13 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
             Component: (nextHundller, backHundller, finshHundller) => (
                 <View style={[
                     styles.flex1,
-                    styles.center
+                    // styles.center
                 ]}>
 
 
 
                     <Text style={styles.topLabel} > {useLocale({}, "phoneScreenSignUp")}</Text>
-                    <View>
+                    <ScrollView>
 
                         <View style={styles.center1}>
                             <InputWithLabel  // phoneErrorMessage
@@ -524,31 +510,43 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         </View>
 
 
-                        <View style={[
-                            styles.rowFlex,
-                            //    styles.spaceBetween,
-                            { marginLeft: 130 },
-                            //    { marginBottom: 40 },
-                            // {margingTop:39}
 
-                        ]}>
-                            <IconButton size={53} locked name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
-                            <IconButton
-                                size={53}
-                                locked
-                                name={useLocale({}, "direction") == "rtl" ? "chevron-circle-left" : "chevron-circle-right"}
-                                onClick={nextHundller}
-                            />
 
+                        <View style={{ marginLeft: 15 }}>
+                            <Text style={styles.newUser}>{useLocale({}, "oldUser")}</Text>
+
+                            <TouchableOpacity>
+                                <Text style={styles.SignIn} onPress={() => {
+                                    navigation.navigate('SignInScreen')
+                                }}>{useLocale({}, "secondScreen3")}</Text>
+                            </TouchableOpacity>
                         </View>
 
-                        <Text style={styles.newUser}>{useLocale({}, "oldUser")}</Text>
-                        <View style={styles.button1}>
-                            <FlatButton text={useLocale({}, "secondScreen3")} bgrColor="#37B8BB" onPress={() => {
-                                navigation.navigate('SignInScreen')
-                            }} />
-                        </View>
+
+                    </ScrollView>
+
+                    <View style={{ flexDirection: "row", marginTop: 0, backgroundColor: '#ffff' }}>
+
+                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => backHundller()} >
+                            <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+                        </TouchableOpacity>
+
+
+                        <TouchableOpacity style={styles.commandButton3} onPress={() => {
+                            if (name !== "") {
+                                showSuccess("kaydedildi")
+                                nextHundller()
+                            } else {
+
+                                showError("Güzel adını bilmek istiyoruz")
+                            }
+                        }} >
+                            <Text style={styles.panelButtonTitle}>{useLocale({}, 'continue')}</Text>
+                            <FontAwesome style={{ marginLeft: 5 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+
+                        </TouchableOpacity>
                     </View>
+
                 </ View>
             ),
             Verifyier: async () => true, //checkPhone,
@@ -560,13 +558,13 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
             (
                 <View style={[
                     styles.flex1,
-                    styles.center
+                    // styles.center
                 ]}>
 
                     <Text style={styles.topLabel} > {useLocale({}, "emailScreenSignUp")}</Text>
 
 
-                    <View>
+                    <ScrollView>
 
                         <View style={styles.center1}>
                             <InputWithLabel
@@ -585,54 +583,43 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         </View>
 
 
-                        {/* <View style={[
-                            styles.rowFlex,
-                            { marginLeft: 130 },
 
 
-                        ]}>
-                            <IconButton size={FontSize.xxxxxxxxxLarge} locked name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
-                            <IconButton
-                                size={FontSize.xxxxxxxxxLarge}
-                                locked
-                                name={useLocale({}, "direction") == "rtl" ? "chevron-circle-left" : "chevron-circle-right"}
-                                onClick={nextHundller}
-                            />
 
-                        </View> */}
+                        <View style={{ marginLeft: 15 }}>
+                            <Text style={styles.newUser}>{useLocale({}, "oldUser")}</Text>
 
-                        <View style={[
-                            styles.rowFlex,
-                            { marginLeft: 110 },
-                        ]}>
-
-                            {/* <IconButton size={FontSize.xxxxxxxxxLarge} locked name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} /> */}
-                            <TouchableOpacity style={styles.circle} onPress={() => {
-                                backHundller()
-                            }}>
-                                <FontAwesome name="chevron-left" size={35} color="#ffff" />
+                            <TouchableOpacity>
+                                <Text style={styles.SignIn} onPress={() => {
+                                    navigation.navigate('SignInScreen')
+                                }}>{useLocale({}, "secondScreen3")}</Text>
                             </TouchableOpacity>
+                        </View>
 
-                            <TouchableOpacity style={styles.circle} onPress={() => {
-                                settripScrren(true);
+
+                    </ScrollView>
+
+                    <View style={{ flexDirection: "row", marginTop: 0, backgroundColor: '#ffff' }}>
+
+                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => backHundller()} >
+                            <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+                        </TouchableOpacity>
+
+
+                        <TouchableOpacity style={styles.commandButton3} onPress={() => {
+                            if (name !== "") {
+                                showSuccess("kaydedildi")
                                 nextHundller()
-                            }}>
-                                <FontAwesome name="chevron-right" size={35} color="#ffff" />
+                            } else {
 
-                            </TouchableOpacity>
+                                showError("Güzel adını bilmek istiyoruz")
+                            }
+                        }} >
+                            <Text style={styles.panelButtonTitle}>{useLocale({}, 'continue')}</Text>
+                            <FontAwesome style={{ marginLeft: 5 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
 
-                        </View>
-
-                        <Text style={styles.newUserLast}>{useLocale({}, "oldUser")}</Text>
-                        <View style={styles.button1}>
-                            <FlatButton text={useLocale({}, "secondScreen3")} bgrColor="#37B8BB" onPress={() => {
-                                navigation.navigate('SignInScreen')
-                            }} />
-                        </View>
-
-
+                        </TouchableOpacity>
                     </View>
-
                 </ View>
 
             ),
@@ -760,7 +747,11 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         </View>
 
 
+
+
                     </ScrollView>
+
+
 
                     <View style={{ flexDirection: "row", marginTop: 10, backgroundColor: '#ffff' }}>
 
@@ -794,33 +785,53 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         {//5 Plate number
             Component: (nextHundller, backHundller, finshHundller) =>
             (
-                <ScrollView style={[
+                <View style={[
                     styles.flex1,
 
                 ]}>
 
-                    <Text style={styles.topLabelPlateNo} > {useLocale({}, "plateNumber")}</Text>
+                    <ScrollView>
 
-                    <View style={styles.centerLast1}>
-                        <InputWithLabel
-                            errorMessage={""}
-                            // label={useLocale({}, "PasswadLabel")}
-                            setValue={(value: string) => setPassward(value.trim())}
-                            value={passward.trim()}
+                        <Text style={styles.topLabelPlateNo} > {useLocale({}, "plateNumber")}</Text>
 
-                            placeholder={useLocale({}, "plateNumber")}
-                            mode={"outlined"}
+                        <View style={styles.centerLast1}>
+                            <InputWithLabel
+                                errorMessage={""}
+                                // label={useLocale({}, "PasswadLabel")}
+                                setValue={(value: string) => setPassward(value.trim())}
+                                value={passward.trim()}
 
-                        />
-                        {/* <Text style={styles.errorText}>{passwardErrorMessage}</Text> */}
+                                placeholder={useLocale({}, "plateNumber")}
+                                mode={"outlined"}
+
+                            />
+                            {/* <Text style={styles.errorText}>{passwardErrorMessage}</Text> */}
 
 
 
 
 
-                    </View>
+                        </View>
 
-                    <View style={{ flexDirection: "row", marginTop: 280, backgroundColor: '#ffff' }}>
+                        <View style={{ marginLeft: 15, marginTop: 20 }}>
+                            <Text style={styles.newUser}>{useLocale({}, "oldUser")}</Text>
+
+                            <TouchableOpacity>
+                                <Text style={styles.SignIn} onPress={() => {
+                                    navigation.navigate('SignInScreen')
+                                }}>{useLocale({}, "secondScreen3")}</Text>
+                            </TouchableOpacity>
+                        </View>
+
+
+
+                    </ScrollView>
+
+
+
+
+
+                    <View style={{ flexDirection: "row", marginTop: 10, backgroundColor: '#ffff' }}>
 
                         <TouchableOpacity style={styles.commandButtonSmall} onPress={() => backHundller()} >
                             <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
@@ -839,11 +850,12 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                             <FontAwesome style={{ marginLeft: 5 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
 
                         </TouchableOpacity>
+
                     </View>
 
 
 
-                </ScrollView>
+                </View>
 
 
             ),
@@ -858,12 +870,16 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                         keyboardShouldPersistTaps="handled"
                         style={{ backgroundColor: 'white', flex: 1, padding: 24 }}>
                         <AddressPickup
-                            placheholderText={useLocale({}, ("EnterPickupLocation"))}
+                            placheholderText={useLocale({}, ("truckAddress"))} // kamyon adresiniz
                             fetchAddress={fetchAddresCords}
                         />
                         <View style={{ marginBottom: 16 }} />
 
+
+
                     </ScrollView>
+
+                
 
                     <View style={{ flexDirection: "row", marginTop: 10, backgroundColor: '#ffff' }}>
 
@@ -896,61 +912,78 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         {//7 password
             Component: (nextHundller, backHundller, finshHundller) =>
             (
-                <ScrollView style={[
+                <View style={[
                     styles.flex1,
                     styles.center
                 ]}>
 
-                    <Text style={styles.topLabelLast} > {useLocale({}, "passwordScreenSignUp")}</Text>
+                    <ScrollView>
+                        <Text style={styles.topLabelLast} > {useLocale({}, "passwordScreenSignUp")}</Text>
 
-                    <View style={styles.centerLast1}>
-                        <InputWithLabel
-                            errorMessage={""}
-                            label={useLocale({}, "PasswadLabel")}
-                            setValue={(value: string) => setPassward(value.trim())}
-                            value={passward.trim()}
-                            secureTextEntry
-                            placeholder={useLocale({}, "PasswadLabel")}
-                            mode={"outlined"}
+                        <View style={styles.centerLast1}>
+                            <InputWithLabel
+                                errorMessage={""}
+                                label={useLocale({}, "PasswadLabel")}
+                                setValue={(value: string) => setPassward(value.trim())}
+                                value={passward.trim()}
+                                secureTextEntry
+                                placeholder={useLocale({}, "PasswadLabel")}
+                                mode={"outlined"}
 
-                        />
-                        <Text style={styles.errorText}>{passwardErrorMessage}</Text>
+                            />
+                            <Text style={styles.errorText}>{passwardErrorMessage}</Text>
 
-                        <InputWithLabel
-                            errorMessage={""}
-                            label={useLocale({}, "ConfirmPasswadLabel")}
-                            setValue={(value: string) => setConfirmPassward(value.trim())}
-                            value={confirmPassward.trim()}
-                            secureTextEntry
-                            placeholder={useLocale({}, "ConfirmPasswadLabel")}
-                            mode={"outlined"}
+                            <InputWithLabel
+                                errorMessage={""}
+                                label={useLocale({}, "ConfirmPasswadLabel")}
+                                setValue={(value: string) => setConfirmPassward(value.trim())}
+                                value={confirmPassward.trim()}
+                                secureTextEntry
+                                placeholder={useLocale({}, "ConfirmPasswadLabel")}
+                                mode={"outlined"}
 
-                        />
-                        <Text style={styles.errorText}>{confirmPasswardErrorMessage}</Text>
+                            />
+                            <Text style={styles.errorText}>{confirmPasswardErrorMessage}</Text>
 
 
 
-                        <View style={[
-                            styles.rowFlex,
-                            //    styles.spaceBetween
-                            { marginTop: 30, marginLeft: 10 }
-                        ]}>
-                            <IconButton size={FontSize.xxxxxxxxxLarge} locked name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
-                            <IconButton size={FontSize.xxxxxxxxxLarge} locked name="check-circle" onClick={finshHundller} />
+
+
+
+
                         </View>
 
+                        <Text style={[styles.newUser,]}>{useLocale({}, "oldUser")}</Text>
+                        <TouchableOpacity>
+                            <Text style={styles.SignIn} onPress={() => {
+                                navigation.navigate('SignInScreen')
+                            }}>{useLocale({}, "secondScreen3")}</Text>
+                        </TouchableOpacity>
+
+                    </ScrollView>
+                    <View style={{ flexDirection: "row", marginTop: 0, backgroundColor: '#ffff' }}>
+
+                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => backHundller()} >
+                            <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+                        </TouchableOpacity>
 
 
+                        <TouchableOpacity style={styles.commandButton3} onPress={() => {
+                            if (name !== "") {
+                                showSuccess("kaydedildi")
+                                finshHundller()
+                            } else {
+
+                                showError("Güzel adını bilmek istiyoruz")
+                            }
+                        }} >
+                            <Text style={styles.panelButtonTitle}>{useLocale({}, 'continue')}</Text>
+                            <FontAwesome style={{ marginLeft: 5 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
+
+                        </TouchableOpacity>
                     </View>
 
-                    <Text style={[styles.newUser,]}>{useLocale({}, "oldUser")}</Text>
-                    <View style={{ paddingLeft: 40, marginRight: 40 }}>
-                        <FlatButton text={useLocale({}, "signInHeader")} bgrColor="#37B8BB" onPress={() => {
-                            navigation.navigate("SignUpScreen")
-                        }} />
-                    </View>
-
-                </ScrollView>
+                </View>
 
 
             ),

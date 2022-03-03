@@ -6,8 +6,26 @@ import { GOOGLE_MAP_KEY } from '../constants/googleMapKey';
 
 const AddressPickup = ({ placheholderText,fetchAddress}:any) => {
 
+    function extractFromAdress(components:any, type:any){
+        for (var i=0; i<components.length; i++)
+            for (var j=0; j<components[i].types.length; j++)
+                if (components[i].types[j]==type) return components[i].long_name;
+        return "";
+    }
     const onPressAddress = (data:any, details:any) => {
-        // console.log("details==>>>>", details)
+        console.log("details==>>>>", details)
+      
+        
+        var country = extractFromAdress(details.address_components, "country");
+        var town = extractFromAdress(details.address_components, "administrative_area_level_1");
+        var region = extractFromAdress(details.address_components, "administrative_area_level_2");
+
+
+        // var city = extractFromAdress(details.address_components, "locality");
+        console.log("country==>>>>", country)
+        console.log("town==>>>>", town)
+        console.log("region==>>>>", region)
+
 
         // let resLength = details.address_components
         // let zipCode = ''
@@ -40,6 +58,7 @@ const AddressPickup = ({ placheholderText,fetchAddress}:any) => {
         const lat = details.geometry.location.lat
         const lng = details.geometry.location.lng
         const adress = details.formatted_address;
+        // const city =details.
         console.log("formatted_address :"+adress);
         // fetchAddress(lat, lng, zipCode, cityText)
 
@@ -57,6 +76,7 @@ const AddressPickup = ({ placheholderText,fetchAddress}:any) => {
                     key: GOOGLE_MAP_KEY,
                     language: 'en'
                 }}
+                // filterReverseGeocodingByTypes={['locality', 'administrative_area_level_1']}
                 styles={{
                     textInputContainer: styles.containerStyle,
                     textInput: styles.textInputStyle
