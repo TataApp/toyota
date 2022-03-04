@@ -15,18 +15,6 @@ import { Provider } from 'react-redux';
 import {store} from './state/index'
 
 
-// const initialState={
-//   1:{
-//     empid:1,
-//     empName:'Employee One' , 
-//     empSalary:10000
-//   },
-//   // 2:{
-//   //   empid:2,
-//   //   empName:'Employee Tow' , 
-//   //   empSalary:20000
-//   // }
-// }
 
 
 

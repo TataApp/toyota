@@ -146,7 +146,10 @@ export default function MainScreen({ navigation }: any) {
                 renderItem={({ item }) => (
                     <View>
 
-                        <TouchableOpacity style={{ flexDirection: "row" }}>
+                        <TouchableOpacity style={{ flexDirection: "row" }} onPress={() => {
+                                    navigation.navigate("tripDetails")
+                                }}
+                            >
                             <View>
                                 <View style={{ flexDirection: "row" }}>
                                     <Text style={{ marginLeft: 20, fontSize: 20 }}>{item.cityFromWhere}</Text>

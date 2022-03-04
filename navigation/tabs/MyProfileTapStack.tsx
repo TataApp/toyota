@@ -5,10 +5,10 @@ import { useLocale } from '../../hooks/useLocale';
 import MyProfile from '../../screens/MyProfileTab/MyProfile';
 import SettingsIcon from '../../components/SettingIcon';
 import MyWallet from '../../screens/MyProfileTab/MyWallet';
-import SevedLoctions from '../../screens/MyProfileTab/SevedLoctions';
+// import tripDetails from '../../screens/mainTab/tripDetails';
 import ProfileInProfile from '../../screens/MyProfileTab/ProfileInProfile';
-import placeAddress from '../../screens/MyProfileTab/placeAddress';
-import help from '../../screens/MyProfileTab/help';
+// import placeAddress from '../../screens/MyProfileTab/placeAddress';
+// import help from '../../screens/MyProfileTab/help';
 import SupportScreen from '../../screens/MyProfileTab/SupportScreen';
 
 const MyProfileStack = createStackNavigator<MyProfileParamList>();
@@ -34,7 +34,8 @@ export default function myProfileStack({ navigation }: { navigation: StackNaviga
                         <SettingsIcon onClick={async () => navigation.navigate("Settings")} />
                 }}
             />
-             <MyProfileStack.Screen
+
+             {/* <MyProfileStack.Screen
                 name="SevedLoctionsScreen"
                 component={SevedLoctions}
                 options={{
@@ -42,7 +43,8 @@ export default function myProfileStack({ navigation }: { navigation: StackNaviga
                     headerLeft: () =>
                         <SettingsIcon onClick={async () => navigation.navigate("Settings")} />
                 }}
-            />
+            /> */}
+
              <MyProfileStack.Screen
                 name="ProfileInProfileScreen"
                 component={ProfileInProfile}
@@ -52,14 +54,14 @@ export default function myProfileStack({ navigation }: { navigation: StackNaviga
                         <SettingsIcon onClick={async () => navigation.navigate("Settings")} />
                 }}
             />
-             <MyProfileStack.Screen
+             {/* <MyProfileStack.Screen
                 name="placeAddressScreen"
                 component={placeAddress}
                 options={{
                     headerShown: false ,
                  
                 }}
-            />
+            /> */}
              <MyProfileStack.Screen
                 name="SupportScreen"
                 component={SupportScreen}

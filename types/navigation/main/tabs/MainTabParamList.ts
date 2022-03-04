@@ -24,7 +24,7 @@ type MainTabParamList = {
         DriverId:number
     };
     ConfirmationPhoneCodeScreen:undefined;
-    SevedLoctionsScreen:undefined;
+    tripDetails:undefined;
 
     AdressScreen:undefined;
     AddAdresScreen:undefined;
