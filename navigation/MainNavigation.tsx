@@ -7,6 +7,7 @@ import { useLocale } from '../hooks/useLocale';
 import SettingsStack from './settings/SettingsStack';
 import ProfileNavigation from './ProfileNavigation';
 import StoreNavigation from './StoreNavigation';
+import tripDetails from '../screens/mainTab/tripDetails';
 
 const MainStack = createStackNavigator<MainNavigationParamList>();
 
@@ -30,11 +31,11 @@ export default function MainNavigation() {
                 component={ProfileNavigation}
                 options={{ headerShown: false}}
             />
-             {/* <MainStack.Screen
-                name='Store'
-                component={StoreNavigation}
+             <MainStack.Screen
+                name='tripDetails'
+                component={tripDetails}
                 options={{ headerShown: false}}
-            /> */}
+            />
            
         </MainStack.Navigator>
     )
