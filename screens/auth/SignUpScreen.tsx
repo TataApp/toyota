@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react'
-import { Button, StyleSheet, Image } from 'react-native'
+import { Button, StyleSheet, Image, LogBox } from 'react-native'
 import StagesLayout from '../../components/layouts/StagesLayout';
 import { View } from "../../components/themed/View";
 import { Text } from "../../components/themed/Text";
@@ -24,13 +24,17 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import AddressPickup from '../../components/AddressPickup'
 
 export default function SignUpScreen({ navigation }: { navigation: StackNavigationProp<AuthNavigationParamList, "SignUpScreen"> }) {
+    LogBox.ignoreLogs([
+        'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.',
+    ]);
+
     const [colorOfTextMiniKamyon, setcolorOfTextMiniKamyon] = useState('black');
     const [colorOfTextLargeKamyon, setcolorOfTextLargeKamyon] = useState('black');
     const [colorOfTextXLargeKamyon, setcolorOfTextXLargeKamyon] = useState('black');
 
-    const [colorOfbackGroundMiniKamyon, setcolorOfbackGroundMiniKamyon] = useState('#ffff');
-    const [colorOfbackGroundLargeKamyon, setcolorOfbackGroundLargeKamyon] = useState('#ffff');
-    const [colorOfbackGroundXLargeKamyon, setcolorOfbackGroundXLargeKamyon] = useState('#ffff');
+    const [colorOfBorderMiniKamyon, setcolorOfBorderMiniKamyon] = useState('black');
+    const [colorOfBorderLargeKamyon, setcolorOfBorderLargeKamyon] = useState('black');
+    const [colorOfBorderXLargeKamyon, setcolorOfBorderXLargeKamyon] = useState('black');
 
     const [miniKamyon, setminiKamyon] = useState(false);
     const [largeKamyon, setlargeKamyon] = useState(false);
@@ -69,14 +73,14 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         }, rectangleLargeKamyon: {
             width: 167 * 2,
             height: 115,
-            borderColor: "#39A1A3",
+            borderColor: colorOfBorderLargeKamyon,// "#39A1A3",
             borderWidth: 1,
             borderTopRightRadius: 30,
             borderRadius: 20,
             marginBottom: 10,
             marginLeft: 25,
             flexDirection: 'row',
-            backgroundColor: colorOfbackGroundLargeKamyon
+            backgroundColor: "#ffff"
 
 
         }, commandButton3: {
@@ -126,14 +130,14 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         }, rectangleMiniKamyon: {
             width: 167 * 2,
             height: 115,
-            borderColor: "#39A1A3",
+            borderColor:colorOfBorderMiniKamyon,// "#39A1A3",
             borderWidth: 1,
             borderRadius: 20,
             borderTopRightRadius: 30,
             marginBottom: 10,
             marginLeft: 25,
             flexDirection: 'row',
-            backgroundColor: colorOfbackGroundMiniKamyon
+            backgroundColor: "#ffff"
 
 
         }, rectangleForText: {
@@ -239,14 +243,14 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         }, rectangleXLargeKamyon: {
             width: 167 * 2,
             height: 115,
-            borderColor: "#39A1A3",
+            borderColor:colorOfBorderXLargeKamyon,// "#39A1A3",
             borderWidth: 1,
             borderRadius: 20,
             borderTopRightRadius: 30,
             marginBottom: 10,
             marginLeft: 25,
             flexDirection: 'row',
-            backgroundColor: colorOfbackGroundXLargeKamyon
+            backgroundColor: "#ffff"
 
 
         }
@@ -258,21 +262,12 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
     const [phoneErrorMessage, setPhoneErrorMessage] = useState<string>('');
     const [passwardErrorMessage, setPasswardErrorMessage] = useState<string>('');
     const [passward, setPassward] = useState<string>('');
+    const [plateNumber, setplateNumber] = useState<string>('')
     const [confirmPassward, setConfirmPassward] = useState<string>('');
     const [confirmPasswardErrorMessage, setConfirmPasswardErrorMessage] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [name, setName] = useState<string>('');
-    //const [currentStage, setCurrentStage] = useState<number>(0);
-    const [tripScrren, settripScrren] = useState(false)
-    const [openRegin, setOpenRegin] = useState(false);
-    const [openRegin2, setOpenRegin2] = useState(false);
-    const [valueRegin, setValueRegin] = useState(null);
-    const [valueRegin2, setValueRegin2] = useState(null);
-    const [itemsRegion, setItemsRegin,] = useState([
-        { label: 'Sakarya', value: 1 },
-        { label: 'Istanbul', value: 2 },
-        { label: 'ttt', value: 3 },
-    ]);
+   
     const [vehicleType, setVehicleType] = useState({
         vehicleTypeText: "",
         vehicleTypeNo: 0
@@ -289,25 +284,34 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
 
         console.log("test checkEmail");
 
-        let result: boolean = true;
-        if (validator.isEmail(email) == false) {
-            // setEmailErrorMessage(useLocalErrorMessage({}, "invalidEmail"))
-            showError(useLocalErrorMessage({}, "invalidEmail"))
-            result = false;
+        if(email == ""){
+            return true;
+
+        }else{
+            let result: boolean = true;
+            if (validator.isEmail(email) == false) {
+                // setEmailErrorMessage(useLocalErrorMessage({}, "invalidEmail"))
+                showError(useLocalErrorMessage({}, "invalidEmail"))
+                result = false;
+            }
+    
+            setEmailErrorMessage("");
+    
+            if (result == false)
+                return false;
+    
+            let responseEmail = await checkEmailService(email);
+            if (responseEmail.data.exists) {
+                // setEmailErrorMessage(useLocalErrorMessage({}, "emailAlreadyExist"))
+                showError(useLocalErrorMessage({}, "emailAlreadyExist"))
+                return false;
+            }
+            return result;
         }
 
-        setEmailErrorMessage("");
+       
 
-        if (result == false)
-            return false;
 
-        let responseEmail = await checkEmailService(email);
-        if (responseEmail.data.exists) {
-            // setEmailErrorMessage(useLocalErrorMessage({}, "emailAlreadyExist"))
-            showError(useLocalErrorMessage({}, "emailAlreadyExist"))
-            return false;
-        }
-        return result;
     }
 
     const colorHandlerMiniKamyon = () => {
@@ -316,6 +320,9 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         setcolorOfTextLargeKamyon('black');
         setcolorOfTextXLargeKamyon('black');
 
+        setcolorOfBorderMiniKamyon('#39A1A3');
+        setcolorOfBorderLargeKamyon('black');
+        setcolorOfBorderXLargeKamyon('black');
 
     }
 
@@ -325,12 +332,23 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         setcolorOfTextLargeKamyon('#39A1A3');
         setcolorOfTextXLargeKamyon('black');
 
+        setcolorOfBorderMiniKamyon('black');
+        setcolorOfBorderLargeKamyon('#39A1A3');
+        setcolorOfBorderXLargeKamyon('black');
+
+
     }
     const colorHandlerXLargeKamyon = () => {
 
         setcolorOfTextMiniKamyon('black');
         setcolorOfTextLargeKamyon('black');
-        setcolorOfTextXLargeKamyon('black');
+        setcolorOfTextXLargeKamyon('#39A1A3');
+
+        setcolorOfBorderMiniKamyon('black');
+        setcolorOfBorderLargeKamyon('black');
+        setcolorOfBorderXLargeKamyon('#39A1A3');
+
+
 
     }
 
@@ -454,7 +472,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
 
                     <View style={{ flexDirection: "row", marginTop: 0, backgroundColor: '#ffff' }}>
 
-                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => backHundller()} >
+                        <TouchableOpacity style={styles.commandButtonSmall}  onPress={() => navigation.navigate("SecondScreen")} >
                             <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
                         </TouchableOpacity>
 
@@ -570,10 +588,10 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                             <InputWithLabel
                                 errorMessage={""}
                                 keyboadType='email-address'
-                                label={useLocale({}, "emailLabel")}
+                                label={useLocale({}, "optionalEmailLabel")}
                                 setValue={(value: string) => setEmail(value.trim())}
                                 value={email.trim()}
-                                placeholder={useLocale({}, "emailLabel")}
+                                placeholder={useLocale({}, "optionalEmailLabel")}
                                 mode={"outlined"}
 
                             />
@@ -623,7 +641,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                 </ View>
 
             ),
-            Verifyier: async () => true,//checkEmail,
+            Verifyier: checkEmail,
             Submit: async () => true
 
 
@@ -798,8 +816,8 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                             <InputWithLabel
                                 errorMessage={""}
                                 // label={useLocale({}, "PasswadLabel")}
-                                setValue={(value: string) => setPassward(value.trim())}
-                                value={passward.trim()}
+                                setValue={(plateNumber: string) => setplateNumber(plateNumber.trim())}
+                                value={plateNumber.trim()}
 
                                 placeholder={useLocale({}, "plateNumber")}
                                 mode={"outlined"}
@@ -839,11 +857,11 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
 
 
                         <TouchableOpacity style={styles.commandButton3} onPress={() => {
-                            if (movingCheck4 === true) {
+                            if (plateNumber !== "") {
                                 showSuccess("kaydedildi")
                                 nextHundller()
                             } else {
-                                showError("Lütfen kamyon tipinizi seçin")
+                                showError("Lütfen plaka numarasını girin !")
                             }
                         }} >
                             <Text style={styles.panelButtonTitle}>{useLocale({}, 'continue')}</Text>
@@ -879,7 +897,6 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
 
                     </ScrollView>
 
-                
 
                     <View style={{ flexDirection: "row", marginTop: 10, backgroundColor: '#ffff' }}>
 
@@ -889,7 +906,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
 
 
                         <TouchableOpacity style={styles.commandButton3} onPress={() => {
-                            if (movingCheck4 === true) {
+                            if (state.pickupCords.formatted_address === true) {
                                 showSuccess("kaydedildi")
                                 nextHundller()
                             } else {
