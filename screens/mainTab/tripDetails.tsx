@@ -270,7 +270,7 @@ export default function MyLoads({ navigation }: any) {
 
                     <View style={{ flexDirection: 'row' }}>
                         <View>
-                            <FontAwesome style={styles.view2circle} color="#A5EA6D" size={FontSize.Regular} name={"circle"} />
+                            <FontAwesome style={styles.view2circle} color="#53D283" size={FontSize.Regular} name={"circle"} />
                             <View style={{
                                 borderStyle: "dotted",
                                 height: 35,
@@ -525,7 +525,7 @@ const styles = StyleSheet.create({
         marginRight: 40,
         marginBottom: 30,
         borderRadius: 10,
-        backgroundColor: '#39A1A3',
+        backgroundColor: '#37B8BB',
         alignItems: 'center',
         marginTop: 10,
     },

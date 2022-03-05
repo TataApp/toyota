@@ -24,7 +24,7 @@ export default function MyProfile({ navigation }: { navigation: StackNavigationP
 
                 <Ionicons style={{ marginTop: 20, marginLeft: 10 }} name="chevron-back" size={FontSize.xxxxxxxLarge} color="#ffff" onPress={()=>navigation.navigate("MyProfileScreen")} />
                 <Text style={{ fontSize: 28, marginLeft: 20, color: '#ffff' }} >Wallet</Text>
-                <Text style={{ fontSize: 35, marginLeft: 20, color: '#d8b1fd' }} >No Balance</Text>
+                <Text style={{ fontSize: 35, marginLeft: 20, color: '#ffff' }} >No Balance</Text>
 
                 <View style={styles.commandButton}  >
                     <Text style={{fontSize:20}}>Latest Transaction</Text>

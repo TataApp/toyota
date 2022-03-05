@@ -42,7 +42,7 @@ export default function MainScreen({ navigation }: any) {
 
     const [trips, setTrips,] = useState([
         { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "1" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "2" },
+        { cityFromWhere: "Sakarya", cityToWhere: "Sakarya", regionFromWhere: "sedivan", regionToWhere: "adabazari", kilometers: "23km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "2" },
         { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "3" },
         { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "4" },
         { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "5" },
@@ -159,7 +159,7 @@ export default function MainScreen({ navigation }: any) {
                                 </View>
 
                                 <View style={{ flexDirection: "row" }}>
-                                    <FontAwesome style={{ marginLeft: 40, marginRight: 5, marginTop: 5 }} color="#A5EA6D" size={FontSize.Regular} name={"circle"} />
+                                    <FontAwesome style={{ marginLeft: 40, marginRight: 5, marginTop: 5 }} color="#53D283" size={FontSize.Regular} name={"circle"} />
                                     <View style={{
                                         borderBottomColor: '#c7c7c7',
                                         borderBottomWidth: 4,
