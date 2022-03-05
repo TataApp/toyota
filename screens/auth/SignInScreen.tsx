@@ -215,20 +215,14 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
 
     const checkPhone = async (): Promise<boolean> => {
 
-        console.log("test checkPhone");
+        console.log("test checkPhone ");
         let result: boolean = true;
         if (validator.isMobilePhone(phone, 'tr-TR') == false) {
-            // setPhoneErrorMessage(useLocalErrorMessage({}, "invalidPhone"))
             showError(useLocalErrorMessage({}, "invalidPhone"));
             return false;
 
         }
-        // return true
-
-
-        // if (result == false)
-        //     return false;
-
+   
         let responsePhone = await checkPhoneService(phone);
 
         if (responsePhone.data.exists == false) {
@@ -236,7 +230,6 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
             showError(useLocalErrorMessage({}, "phoneDoesNotExist"));
             return false;
         }
-
 
         console.log(responsePhone.data.exists);
         return result;
@@ -355,7 +348,7 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
 
                     <View style={{ flexDirection: "row", marginTop: 10, backgroundColor: '#ffff' }}>
 
-                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => backHundller()} >
+                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => navigation.navigate("SecondScreen")} >
                             <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
                         </TouchableOpacity>
 
@@ -366,17 +359,16 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
                         }} >
                             <Text style={styles.panelButtonTitle}>{useLocale({}, 'continue')}</Text>
                             <FontAwesome style={{ marginLeft: 5 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
-
                         </TouchableOpacity>
                     </View>
 
                 </ View>
             ),
-            Verifyier: async () => true,// checkPhone,
+            Verifyier: checkPhone,
             Submit: async () => true
 
         },
-        {//3 password
+        {//2 password
             Component: (nextHundller, backHundller, finshHundller) =>
             (
                 <View style={[
@@ -434,27 +426,6 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
 
                         </TouchableOpacity>
                     </View>
-
-                    {/* <View style={[
-                        styles.background,
-                        styles.rowFlex,
-                        styles.spaceBetween
-                    ]}>
-                        <TouchableOpacity onPress={() => setEmailErrorMessage("")}>
-                            <IconButton size={FontSize.xxxxxxxxxLarge} name={useLocale({}, "direction") == "rtl" ? "chevron-circle-right" : "chevron-circle-left"} onClick={backHundller} />
-                        </TouchableOpacity>
-
-                        <IconButton size={FontSize.xxxxxxxxxLarge} willDie name="check-circle" onClick={finshHundller} />
-                    </View> */}
-
-
-
-                    {/* <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
-                    <View style={[styles.button, styles.background]}>
-                        <FlatButton text={useLocale({}, "goToSignUp")} bgrColor="#CCA4FB" onPress={() => {
-                            navigation.navigate("SignUpScreen")
-                        }} />
-                    </View> */}
                 </View>
 
 

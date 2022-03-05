@@ -71,6 +71,7 @@ export default {
     shippingNumber:"shipping Number",
     photos:"Photos",
     deleteOffer:"Delete Offer",
+    TakeOffer:"Take Offer",
     home:"Home",
     done:"Done",
     profile:"Profile",
@@ -150,6 +151,7 @@ export default {
     truckTipe:"Kamyon tipinizi seçin",
     plateNumber:"Plaka numarası",
     truckAddress:"Kamyon adresiniz",
+    optionalEmailLabel:"E-posta (opsiyonlu)",
 
     
 
@@ -314,6 +316,9 @@ export default {
     truckTipe:"Kamyon tipinizi seçin",
     plateNumber:"plaka numarası",
     truckAddress:"Kamyon adresiniz",
+    optionalEmailLabel:"E-posta (opsiyonlu)",
+    TakeOffer:"Take Offer",
+
 
 
 
@@ -395,6 +400,7 @@ export default {
     shippingNumber:"Nakliye numarası",
     photos:"Fotoğraflar",
     deleteOffer:" Teklif Sil ",
+    TakeOffer:"Teklif al",
     home:"Ana Sayfa",
     done:"Bitti",
     profile:"Profil",
@@ -474,6 +480,8 @@ export default {
     truckTipe:"Kamyon tipinizi seçin",
     plateNumber:"Plaka numarası",
     truckAddress:"Kamyon adresiniz",
+    optionalEmailLabel:"E-posta (opsiyonlu)",
+
 
   },
 

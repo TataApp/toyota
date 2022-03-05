@@ -25,6 +25,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function MainScreen({ navigation }: any) {
 
+    
 
     //#region 
     const dispach = useDispatch();
@@ -158,7 +159,7 @@ export default function MainScreen({ navigation }: any) {
                                 </View>
 
                                 <View style={{ flexDirection: "row" }}>
-                                    <FontAwesome style={{ marginLeft: 40, marginRight: 5, marginTop: 5 }} color="#2AD7B4" size={FontSize.Regular} name={"circle"} />
+                                    <FontAwesome style={{ marginLeft: 40, marginRight: 5, marginTop: 5 }} color="#A5EA6D" size={FontSize.Regular} name={"circle"} />
                                     <View style={{
                                         borderBottomColor: '#c7c7c7',
                                         borderBottomWidth: 4,
@@ -166,7 +167,7 @@ export default function MainScreen({ navigation }: any) {
                                         marginBottom: 5,
 
                                     }} />
-                                    <AntDesign style={{ marginTop: 3 }} name="caretright" size={FontSize.Large} color="#FF0000" />
+                                    <AntDesign style={{ marginTop: 3 }} name="caretright" size={FontSize.Large} color="#C4666D" />
 
                                 </View>
 

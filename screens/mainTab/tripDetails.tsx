@@ -101,7 +101,7 @@ export default function MyLoads({ navigation }: any) {
 
 
 
-    let vehicleType = 0;
+    let vehicleType = 3;
     let no = 0;
     let tripServis = 2;
     let houseType = 1;
@@ -219,7 +219,7 @@ export default function MyLoads({ navigation }: any) {
 
 
 
-                <View style={{ flexDirection: "row", marginLeft: 20 }}>
+                {/* <View style={{ flexDirection: "row", marginLeft: 20 }}>
 
                     <View style={styles.OperationBar} />
 
@@ -243,13 +243,13 @@ export default function MyLoads({ navigation }: any) {
                         <View style={styles.OperationBarFalse} />
                     }
 
-                </View>
+                </View> 
 
 
 
                 {confirmed == true && <Text style={{ fontSize: FontSize.xxSmall, color: '#A8E763', marginLeft: 55, marginTop: 5, fontWeight: 'bold' }}>Kayıtlı</Text>}
 
-
+*/}
 
 
 
@@ -342,7 +342,7 @@ export default function MyLoads({ navigation }: any) {
                                     <Text style={styles.infoText1}> Fiyat</Text>
                                     <Text style={styles.infoText}>50 TL</Text>
                                 </View>
-                                <View style={{ paddingLeft: 75 }}>
+                                <View style={{ paddingLeft: 85 }}>
                                     <Text style={styles.infoText1}> {useLocale({}, "PhoneLabel")}</Text>
                                     <Text style={styles.infoText}>05535456165 </Text>
                                 </View>
@@ -429,7 +429,7 @@ export default function MyLoads({ navigation }: any) {
 
                                         <View>
                                             <Text style={styles.infoText1}> {useLocale({}, "AssistantService")}</Text>
-                                            <Text style={styles.infoText}>5</Text>
+                                            <Text style={styles.infoText}>5 kişi</Text>
                                         </View>
 
                                     </View>
@@ -481,7 +481,7 @@ export default function MyLoads({ navigation }: any) {
 
                 <View>
                     <TouchableOpacity style={styles.commandButton}  >
-                        <Text style={styles.panelButtonTitle}>{useLocale({}, 'deleteOffer')}</Text>
+                        <Text style={styles.panelButtonTitle}>{useLocale({}, 'TakeOffer')}</Text>
 
                     </TouchableOpacity>
                 </View>

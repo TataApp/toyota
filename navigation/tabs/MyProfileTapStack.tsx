@@ -35,15 +35,6 @@ export default function myProfileStack({ navigation }: { navigation: StackNaviga
                 }}
             />
 
-             {/* <MyProfileStack.Screen
-                name="SevedLoctionsScreen"
-                component={SevedLoctions}
-                options={{
-                    headerShown: false ,
-                    headerLeft: () =>
-                        <SettingsIcon onClick={async () => navigation.navigate("Settings")} />
-                }}
-            /> */}
 
              <MyProfileStack.Screen
                 name="ProfileInProfileScreen"
@@ -54,14 +45,7 @@ export default function myProfileStack({ navigation }: { navigation: StackNaviga
                         <SettingsIcon onClick={async () => navigation.navigate("Settings")} />
                 }}
             />
-             {/* <MyProfileStack.Screen
-                name="placeAddressScreen"
-                component={placeAddress}
-                options={{
-                    headerShown: false ,
-                 
-                }}
-            /> */}
+            
              <MyProfileStack.Screen
                 name="SupportScreen"
                 component={SupportScreen}
