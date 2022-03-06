@@ -104,20 +104,6 @@ export default function MainScreen({ navigation }: any) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     useEffect(() => {
         //Runs only on the first render
         StatusBar.setHidden(true);
