@@ -140,7 +140,7 @@ export default function MyLoads({ navigation }: any) {
 
                             {vehicleType == 0 &&
                                 <Image
-                                    style={{ width: 100, height: 40 }}
+                                    style={{ width: 100, height: 45 }}
                                     source={require('../../assets/images/xlarge_kamyon.png')}
                                 />
                             }
@@ -152,13 +152,13 @@ export default function MyLoads({ navigation }: any) {
                             }
                             {vehicleType == 2 &&
                                 <Image
-                                    style={{ width: 100, height: 45 }}
+                                    style={{ width: 100, height: 57 }}
                                     source={require('../../assets/images/large_kamyon.png')}
                                 />
                             }
                             {vehicleType == 3 &&
                                 <Image
-                                    style={{ width: 100, height: 40 }}
+                                    style={{ width: 100, height: 47 }}
                                     source={require('../../assets/images/xlarge_kamyon.png')}
                                 />
                             }
