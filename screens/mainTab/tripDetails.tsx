@@ -1,13 +1,12 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { View, Button, Platform, Text, TouchableOpacity, StyleSheet, Image, FlatList, TextInput } from 'react-native';
+import { View, Button, Platform, Text, TouchableOpacity, StyleSheet, Image, FlatList, TextInput, Modal, Animated } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { FontSize } from '../../constants/FontSize';
 import { Card } from 'native-base';
 import { useLocale } from '../../hooks/useLocale';
 import { FontAwesome } from '@expo/vector-icons';
-import { Transition, Transitioning } from 'react-native-reanimated';
 
 import { useThemeColor } from '../../hooks/useThemeColor'
 import DashedLine from 'react-native-dashed-line';
@@ -48,6 +47,9 @@ export default function MyLoads({ navigation }: any) {
     const [placeHasBeenReached, setplaceHasBeenReached] = useState(false)
     const [goodsMoved, setgoodsMoved] = useState(false)
     const [operationText, setoperationText] = useState("Confirmed")
+    const [visible, setVisible] = React.useState(false);
+
+    const [takeOffer, setTakeOffer] = useState(false)
     const ref = React.useRef();
 
     const [trip, setTrip] = useState([])
@@ -92,6 +94,44 @@ export default function MyLoads({ navigation }: any) {
     // {isFocused && getTrip()}
 
 
+    const ModalPoup = ({ visible, children }) => {
+        const [showModal, setShowModal] = React.useState(visible);
+        const scaleValue = React.useRef(new Animated.Value(0)).current;
+        React.useEffect(() => {
+            toggleModal();
+        }, [visible]);
+        const toggleModal = () => {
+            if (visible) {
+                setShowModal(true);
+                Animated.spring(scaleValue, {
+                    toValue: 1,
+                    duration: 300,
+                    useNativeDriver: true,
+                }).start();
+            } else {
+                setTimeout(() => setShowModal(false), 200);
+                Animated.timing(scaleValue, {
+                    toValue: 0,
+                    duration: 300,
+                    useNativeDriver: true,
+                }).start();
+            }
+        };
+        return (
+            <Modal transparent visible={showModal}>
+                <View style={styles.modalBackGround}>
+
+                    <Animated.View
+                        style={[styles.modalContainer, { transform: [{ scale: scaleValue }] }]}>
+                        {children}
+                    </Animated.View>
+                </View>
+            </Modal>
+        );
+    };
+
+
+
     useFocusEffect(
         React.useCallback(() => {
             getTrip();
@@ -109,6 +149,38 @@ export default function MyLoads({ navigation }: any) {
     return (
 
         <ScrollView>
+
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <ModalPoup visible={visible}>
+                    <View style={{ alignItems: 'center' }}>
+                        <View style={styles.header}>
+                            <TouchableOpacity onPress={() => {
+                                setVisible(false)
+                                // navigation.navigate(navigationPage)
+
+                            }}>
+                                <Image
+                                    source={require('../../assets/images/x.png')}
+                                    style={{ height: 30, width: 30 }}
+
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={{ alignItems: 'center' }}>
+                        <Image
+                            source={require('../../assets/images/success.png')}
+                            style={{ height: 150, width: 150, marginVertical: 10 }}
+                        />
+                    </View>
+
+                    <Text style={{ marginVertical: 30, fontSize: 20, textAlign: 'center' }}>
+                        {useLocale({}, 'ReserveShipment')}
+                    </Text>
+                </ModalPoup>
+            </View>
+
+
             <Card style={styles.listItem}>
                 <View style={{
                     height: 40,
@@ -217,39 +289,6 @@ export default function MyLoads({ navigation }: any) {
                 </View>
 
 
-
-
-                {/* <View style={{ flexDirection: "row", marginLeft: 20 }}>
-
-                    <View style={styles.OperationBar} />
-
-                    {acceptedFromDriver == true ? <View style={styles.OperationBar} >
-                        <Text style={{ fontSize: FontSize.xxSmall, color: '#A8E763', marginLeft: 10, marginTop: 10, fontWeight: 'bold' }}>Kabul edildi</Text>
-                    </View>
-                        :
-                        <View style={styles.OperationBarFalse} />
-                    }
-                    {placeHasBeenReached == true ? <View style={styles.OperationBar} >
-                        <Text style={{ fontSize: FontSize.xxSmall, color: '#A8E763', marginLeft: 0, marginTop: 10, fontWeight: 'bold' }}>Konumda</Text>
-                    </View>
-                        :
-                        <View style={styles.OperationBarFalse} />
-                    }
-                    {goodsMoved == true ?
-                        <View style={styles.OperationBar} >
-                            <Text style={{ fontSize: FontSize.xxSmall, color: '#A8E763', marginLeft: 0, marginTop: 10, fontWeight: 'bold' }}>ُTransfer edildi</Text>
-                        </View>
-                        :
-                        <View style={styles.OperationBarFalse} />
-                    }
-
-                </View> 
-
-
-
-                {confirmed == true && <Text style={{ fontSize: FontSize.xxSmall, color: '#A8E763', marginLeft: 55, marginTop: 5, fontWeight: 'bold' }}>Kayıtlı</Text>}
-
-*/}
 
 
 
@@ -479,12 +518,16 @@ export default function MyLoads({ navigation }: any) {
 
                 </View>
 
-                <View>
-                    <TouchableOpacity style={styles.commandButton}  >
-                        <Text style={styles.panelButtonTitle}>{useLocale({}, 'TakeOffer')}</Text>
-
-                    </TouchableOpacity>
-                </View>
+                {takeOffer == false &&
+                    <View>
+                        <TouchableOpacity style={styles.commandButton} onPress={() => {
+                            setTakeOffer(true)
+                            setVisible(true);
+                        }}>
+                            <Text style={styles.panelButtonTitle}>{useLocale({}, 'TakeOffer')}</Text>
+                        </TouchableOpacity>
+                    </View>
+                }
             </Card>
         </ScrollView>
     );
@@ -561,7 +604,12 @@ const styles = StyleSheet.create({
 
     }, infoContainer: {
         flexDirection: "column"
-    },
+    },header: {
+        width: '100%',
+        height: 40,
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+      },
     infoText: {
         fontSize: 16,
         fontWeight: "400",
@@ -572,6 +620,19 @@ const styles = StyleSheet.create({
         // color:"red"
 
 
+    },
+    modalBackGround: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }, modalContainer: {
+        width: '80%',
+        backgroundColor: 'white',
+        paddingHorizontal: 20,
+        paddingVertical: 30,
+        borderRadius: 20,
+        elevation: 20,
     },
     infoText1: {
         color: "#9F9D9D",

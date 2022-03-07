@@ -152,6 +152,7 @@ export default {
     plateNumber:"Plaka numarası",
     truckAddress:"Kamyon adresiniz",
     optionalEmailLabel:"E-posta (opsiyonlu)",
+    ReserveShipment:"Tebrikler, bu yükü sizin için rezerve edildi. ( Yüklerim ) sayfasından tüm yüklerinizi görebilirsiniz."
 
     
 
@@ -318,6 +319,7 @@ export default {
     truckAddress:"Kamyon adresiniz",
     optionalEmailLabel:"E-posta (opsiyonlu)",
     TakeOffer:"Take Offer",
+    ReserveShipment:"Tebrikler, bu yükü sizin için rezerve edildi. ( Yüklerim ) sayfasından tüm yüklerinizi görebilirsiniz."
 
 
 
@@ -481,6 +483,7 @@ export default {
     plateNumber:"Plaka numarası",
     truckAddress:"Kamyon adresiniz",
     optionalEmailLabel:"E-posta (opsiyonlu)",
+    ReserveShipment:"Tebrikler, bu yükü sizin için rezerve edildi. ( Yüklerim ) sayfasından tüm yüklerinizi görebilirsiniz."
 
 
   },
