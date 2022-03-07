@@ -130,7 +130,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         }, rectangleMiniKamyon: {
             width: 167 * 2,
             height: 115,
-            borderColor:colorOfBorderMiniKamyon,// "#39A1A3",
+            borderColor: colorOfBorderMiniKamyon,// "#39A1A3",
             borderWidth: 1,
             borderRadius: 20,
             borderTopRightRadius: 30,
@@ -243,7 +243,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
         }, rectangleXLargeKamyon: {
             width: 167 * 2,
             height: 115,
-            borderColor:colorOfBorderXLargeKamyon,// "#39A1A3",
+            borderColor: colorOfBorderXLargeKamyon,// "#39A1A3",
             borderWidth: 1,
             borderRadius: 20,
             borderTopRightRadius: 30,
@@ -267,7 +267,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
     const [confirmPasswardErrorMessage, setConfirmPasswardErrorMessage] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [name, setName] = useState<string>('');
-   
+
     const [vehicleType, setVehicleType] = useState({
         vehicleTypeText: "",
         vehicleTypeNo: 0
@@ -284,22 +284,22 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
 
         console.log("test checkEmail");
 
-        if(email == ""){
+        if (email == "") {
             return true;
 
-        }else{
+        } else {
             let result: boolean = true;
             if (validator.isEmail(email) == false) {
                 // setEmailErrorMessage(useLocalErrorMessage({}, "invalidEmail"))
                 showError(useLocalErrorMessage({}, "invalidEmail"))
                 result = false;
             }
-    
+
             setEmailErrorMessage("");
-    
+
             if (result == false)
                 return false;
-    
+
             let responseEmail = await checkEmailService(email);
             if (responseEmail.data.exists) {
                 // setEmailErrorMessage(useLocalErrorMessage({}, "emailAlreadyExist"))
@@ -309,7 +309,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
             return result;
         }
 
-       
+
 
 
     }
@@ -472,7 +472,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
 
                     <View style={{ flexDirection: "row", marginTop: 0, backgroundColor: '#ffff' }}>
 
-                        <TouchableOpacity style={styles.commandButtonSmall}  onPress={() => navigation.navigate("SecondScreen")} >
+                        <TouchableOpacity style={styles.commandButtonSmall} onPress={() => navigation.navigate("SecondScreen")} >
                             <FontAwesome style={{ marginLeft: 0 }} name={"chevron-left"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
                         </TouchableOpacity>
 
@@ -910,7 +910,7 @@ export default function SignUpScreen({ navigation }: { navigation: StackNavigati
                                 showSuccess("kaydedildi")
                                 nextHundller()
                             } else {
-                                showError("Lütfen kamyon tipinizi seçin")
+                                showError("pppp")
                             }
                         }} >
                             <Text style={styles.panelButtonTitle}>{useLocale({}, 'continue')}</Text>
