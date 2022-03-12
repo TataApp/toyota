@@ -1,4 +1,5 @@
-const API_URL = "http://10.7.84.23:5000"
+const API_URL = "http://192.168.1.50:5000"
+//"http://10.7.84.23:5000"
 //"http://192.168.1.9:5000"
 //"http://10.211.55.6:5000"
 //192.168.1.11
@@ -18,6 +19,9 @@ export default {
 
   addTrip: API_URL +"/api/Trip/Add",
   getTrip: API_URL +"/api/Trip/GetTrip",
+
+  addTripForDriver: API_URL +"/api/Driver/TripsForDriver",
+  getTripForDriver: API_URL +"/api/Driver/GetTripsForDriver",
 
   SmsCheck: API_URL +"/Add",
 

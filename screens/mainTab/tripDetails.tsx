@@ -10,7 +10,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { useThemeColor } from '../../hooks/useThemeColor'
 import DashedLine from 'react-native-dashed-line';
-import { getTripService } from '../../services/apiCalls/getTripService';
+// import { getTripService } from '../../services/apiCalls/getTripsForDriverService';
 import axios from 'axios';
 import ApiRoutes from '../../constants/ApiRoutes';
 import { getAccessTokenForUsageService } from '../../services/helper/getAccessTokenForUsageService';
@@ -55,42 +55,42 @@ export default function MyLoads({ navigation }: any) {
     const [trip, setTrip] = useState([])
 
 
-    const getTrip = async () => {
-        let response = await getTripService();
+    // const getTrip = async () => {
+    //     let response = await getTripService();
 
-        if (response == null) {
-            console.log("there is no trips!")
-        }
-        if (response) {
+    //     if (response == null) {
+    //         console.log("there is no trips!")
+    //     }
+    //     if (response) {
 
-            // setState({persons:response})
-            // console.log("state in Get :" + state)
+    //         // setState({persons:response})
+    //         // console.log("state in Get :" + state)
 
 
-            // console.log("data=>: " + response.toWhere)
-            let customerPhone = response.customerPhone;
-            let fromWhere = response.fromWhere;
-            let toWhere = response.toWhere;
-            let tripDate = response.tripDate;
-            let tripDetailes = response.tripDetailes;
-            let tripId = response.tripId;
-            let tripServis = response.tripServis;
-            let houseType = response.houseType; //
-            let vehicleType = response.vehicleType;
-            let Assistants = response.assistants;
-            let randomIdForTrip = response.randomIdForTrip;
-            let price = response.price;
-            let tripTime = '';
-            let image = 1;
-            let index = 2;
-            let no = 1;
-            console.log(response.customerPhone, response.fromWhere, response.toWhere, response.tripDate, response.tripDetailes, response.tripId, response.tripServis,)
-            setTrip([...trip, { customerPhone, fromWhere, toWhere, tripDate, tripDetailes, tripId, tripServis, houseType, vehicleType, Assistants, randomIdForTrip, price, tripTime, image, index, no }])
-            // setTrip([{customerPhone,fromWhere,toWhere,tripDate,tripDetailes,tripId,tripServis,tripTime,image,index,no}])
-            // setTrip(trip.splice(1));
+    //         // console.log("data=>: " + response.toWhere)
+    //         let customerPhone = response.customerPhone;
+    //         let fromWhere = response.fromWhere;
+    //         let toWhere = response.toWhere;
+    //         let tripDate = response.tripDate;
+    //         let tripDetailes = response.tripDetailes;
+    //         let tripId = response.tripId;
+    //         let tripServis = response.tripServis;
+    //         let houseType = response.houseType; //
+    //         let vehicleType = response.vehicleType;
+    //         let Assistants = response.assistants;
+    //         let randomIdForTrip = response.randomIdForTrip;
+    //         let price = response.price;
+    //         let tripTime = '';
+    //         let image = 1;
+    //         let index = 2;
+    //         let no = 1;
+    //         console.log(response.customerPhone, response.fromWhere, response.toWhere, response.tripDate, response.tripDetailes, response.tripId, response.tripServis,)
+    //         setTrip([...trip, { customerPhone, fromWhere, toWhere, tripDate, tripDetailes, tripId, tripServis, houseType, vehicleType, Assistants, randomIdForTrip, price, tripTime, image, index, no }])
+    //         // setTrip([{customerPhone,fromWhere,toWhere,tripDate,tripDetailes,tripId,tripServis,tripTime,image,index,no}])
+    //         // setTrip(trip.splice(1));
 
-        }
-    }
+    //     }
+    // }
     // {isFocused && getTrip()}
 
 
@@ -134,7 +134,7 @@ export default function MyLoads({ navigation }: any) {
 
     useFocusEffect(
         React.useCallback(() => {
-            getTrip();
+            // getTrip();
         }, [])
 
     );

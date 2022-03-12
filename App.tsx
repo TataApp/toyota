@@ -25,7 +25,7 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-  const [currentScreen, setCurrentScreen] = useState<CurrentScreen>('Main');
+  const [currentScreen, setCurrentScreen] = useState<CurrentScreen>('Auth');
 
   const signIn = async () => {
     let profile = await getMyProfileService();

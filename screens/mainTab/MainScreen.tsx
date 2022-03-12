@@ -20,12 +20,12 @@ import { AntDesign, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { FontSize } from '../../constants/FontSize';
 import { color } from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import { getTripsForDriverService } from '../../services/apiCalls/getTripsForDriverService'
 
 
 export default function MainScreen({ navigation }: any) {
 
-    
+
 
     //#region 
     const dispach = useDispatch();
@@ -37,25 +37,69 @@ export default function MainScreen({ navigation }: any) {
 
 
 
+    const [Data, setData] = useState<any>([]);
 
 
 
-    const [trips, setTrips,] = useState([
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "1" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Sakarya", regionFromWhere: "sedivan", regionToWhere: "adabazari", kilometers: "23km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "2" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "3" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "4" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "5" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "6" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "7" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "8" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "9" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "10" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "11" },
-        { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "12" },
-    ]);
+    // const [trips, setTrips,] = useState([
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "1" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Sakarya", regionFromWhere: "sedivan", regionToWhere: "adabazari", kilometers: "23km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "2" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "3" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "4" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "5" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "6" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "7" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "8" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "9" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "10" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "11" },
+    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "12" },
+    // ]);
+
+    let response: any;
+    const getTripsForDriver = async () => {
+        response = await getTripsForDriverService().then(res => {
+            console.log(res?.data.tripsForDrivers);
+            console.log(res?.data.tripsForDrivers);
+
+            setData(res?.data.tripsForDrivers);
+        });
+        console.log(".........!")
+
+        console.log(Data)
+        // setData(response.data.tripsForDrivers);
+        if (response == null) {
+            console.log("there is no trips!")
+            // setData(response.tripsForDrivers);
+        }
+        if (response) {
+
+            // console.log("1 ==> : "+ response)
+
+            //  let customerPhone = response.tripsForDrivers;
+            // console.log("1 ==> : "+ customerPhone)
+
+            // let fromWhere = response.fromWhere;
+            // let toWhere = response.toWhere;
+            // let tripDate = response.tripDate;
+            // let tripDetailes = response.tripDetailes;
+            // let tripId = response.tripId;
+            // let tripServis = response.tripServis;
+            // let houseType = response.houseType; //
+            // let vehicleType = response.vehicleType;
+            // let Assistants = response.assistants;
+            // let randomIdForTrip = response.randomIdForTrip;
+            // let price = response.price;
+            // let tripTime = '';
+            // let image = 1;
+            // let index = 2;
+            // let no = 1;
+            // console.log(response.customerPhone, response.fromWhere, response.toWhere, response.tripDate, response.tripDetailes, response.tripId, response.tripServis,)
+            // setTrip([...trip, { customerPhone, fromWhere, toWhere, tripDate, tripDetailes, tripId, tripServis, houseType, vehicleType, Assistants, randomIdForTrip, price, tripTime, image, index, no }])
 
 
+        }
+    }
 
 
 
@@ -108,7 +152,10 @@ export default function MainScreen({ navigation }: any) {
         //Runs only on the first render
         StatusBar.setHidden(true);
         // Stages.length=1;
-
+        // React.useCallback(() => {
+        //     getTripsForDriver();
+        //    }, [])
+        getTripsForDriver();
 
     }, []);
 
@@ -118,30 +165,34 @@ export default function MainScreen({ navigation }: any) {
     return (
 
         <View style={[styles.flex1]}>
-
+            
             <View style={{ flexDirection: 'row', backgroundColor: '#ffff' }}>
                 <Image
                     style={{ marginLeft: 15, marginBottom: 15, marginTop: 15, width: 170, height: 34 }}
                     source={require('../../assets/images/logo3.png')}
                 />
-            </View>
+            </View> 
             <View style={styles.separator}></View>
 
             <FlatList
-                data={trips}
+                data={Data}
                 // ItemSeparatorComponent = {itemSeprator}
-                renderItem={({ item }) => (
-                    <View>
+                //  key={ response.tripsForDrivers.customerPhone }
+                keyExtractor={(item) => item.customerPhone}
 
+                renderItem={({ item }) => (
+
+
+                    <View>
                         <TouchableOpacity style={{ flexDirection: "row" }} onPress={() => {
-                                    navigation.navigate("tripDetails")
-                                }}
-                            >
+                            navigation.navigate("tripDetails")
+                        }}
+                        >
                             <View>
                                 <View style={{ flexDirection: "row" }}>
-                                    <Text style={{ marginLeft: 20, fontSize: 20 }}>{item.cityFromWhere}</Text>
-                                    <Text style={{ marginLeft: 20, marginTop: 10, fontSize: 12 }}>{item.kilometers}</Text>
-                                    <Text style={{ marginLeft: 40, fontSize: 20 }}>{item.cityToWhere}</Text>
+                                    <Text style={{ marginLeft: 20, fontSize: 20 }}>{item.toWhere}</Text>
+                                    <Text style={{ marginLeft: 20, marginTop: 10, fontSize: 12 }}>450 km</Text>
+                                    <Text style={{ marginLeft: 40, fontSize: 20 }}>{item.toWhere}</Text>
                                 </View>
 
                                 <View style={{ flexDirection: "row" }}>
@@ -158,10 +209,10 @@ export default function MainScreen({ navigation }: any) {
                                 </View>
 
                                 <View style={{ flexDirection: "row" }}>
-                                    <Text style={{ marginLeft: 20, fontSize: 20, color: "#7B7B7B" }}>{item.regionFromWhere}</Text>
-                                    <Text style={{ marginLeft: 0, fontSize: 15, marginTop: 20, color: "black" }}>{item.truckType}</Text>
+                                    <Text style={{ marginLeft: 20, fontSize: 20, color: "#7B7B7B" }}>{item.toWhere}</Text>
+                                    <Text style={{ marginLeft: 0, fontSize: 15, marginTop: 20, color: "black" }}>Büyük Kamyon</Text>
 
-                                    <Text style={{ marginLeft: 0, fontSize: 20, color: "#7B7B7B", marginBottom: 10 }}>{item.regionToWhere}</Text>
+                                    <Text style={{ marginLeft: 0, fontSize: 20, color: "#7B7B7B", marginBottom: 10 }}>{item.toWhere}</Text>
                                 </View>
 
 
@@ -174,6 +225,7 @@ export default function MainScreen({ navigation }: any) {
                         </TouchableOpacity>
                         <View style={styles.separator} />
                     </View>
+
                 )}
             />
 
