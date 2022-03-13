@@ -130,7 +130,7 @@ export default function MainScreen({ navigation }: any) {
             borderRadius: 20,
             // borderTopRightRadius: 30,
             marginBottom: 10,
-            marginLeft: 20,
+            marginLeft: 5,
             marginTop: 5,
             flexDirection: 'row',
             backgroundColor: "#39A1A3",
@@ -178,7 +178,7 @@ export default function MainScreen({ navigation }: any) {
                 data={Data}
                 // ItemSeparatorComponent = {itemSeprator}
                 //  key={ response.tripsForDrivers.customerPhone }
-                keyExtractor={(item) => item.customerPhone}
+                keyExtractor={(item) => item.randomIdForTrip}
 
                 renderItem={({ item }) => (
 
@@ -190,9 +190,9 @@ export default function MainScreen({ navigation }: any) {
                         >
                             <View>
                                 <View style={{ flexDirection: "row" }}>
-                                    <Text style={{ marginLeft: 20, fontSize: 20 }}>{item.toWhere}</Text>
-                                    <Text style={{ marginLeft: 20, marginTop: 10, fontSize: 12 }}>450 km</Text>
-                                    <Text style={{ marginLeft: 40, fontSize: 20 }}>{item.toWhere}</Text>
+                                    <Text style={{ marginLeft: 20, fontSize: 20 }}>{item.fromWhereCity}</Text>
+                                    <Text style={{ marginLeft: 10, marginTop: 10, fontSize: 12 }}>{item.distance} Km</Text>
+                                    <Text style={{ marginLeft: 40, fontSize: 20 }}>{item.toWhereCity}</Text>
                                 </View>
 
                                 <View style={{ flexDirection: "row" }}>
@@ -209,10 +209,10 @@ export default function MainScreen({ navigation }: any) {
                                 </View>
 
                                 <View style={{ flexDirection: "row" }}>
-                                    <Text style={{ marginLeft: 20, fontSize: 20, color: "#7B7B7B" }}>{item.toWhere}</Text>
+                                    <Text style={{ marginLeft: 20, fontSize: 20, color: "#7B7B7B" }}>{item.fromWhereRegion}</Text>
                                     <Text style={{ marginLeft: 0, fontSize: 15, marginTop: 20, color: "black" }}>Büyük Kamyon</Text>
 
-                                    <Text style={{ marginLeft: 0, fontSize: 20, color: "#7B7B7B", marginBottom: 10 }}>{item.toWhere}</Text>
+                                    <Text style={{ marginLeft: 0, fontSize: 20, color: "#7B7B7B", marginBottom: 10 }}>{item.toWhereRegion}</Text>
                                 </View>
 
 
