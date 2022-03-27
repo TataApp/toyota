@@ -18,6 +18,7 @@ import { getAccessTokenForUsageService } from '../../services/helper/getAccessTo
 import { useIsFocused } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Item } from 'react-native-paper/lib/typescript/components/List/List';
 
 
 // const transition = (
@@ -31,13 +32,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 
 
-export default function MyLoads({ navigation }: any) {
+export default function MyLoads({ route, navigation }: any) {
 
     // const isFocused = useIsFocused(); 
 
     //   const [state, setState] = useState({
     //     persons:[]
     // });
+    const { assistants, customerPhone, distance, fromWhere, houseType, price, randomIdForTrip, toWhere, tripDate, tripDetailes, tripServis, tripTime, vehicleType } = route.params;
 
 
 
@@ -53,45 +55,7 @@ export default function MyLoads({ navigation }: any) {
     const ref = React.useRef();
 
     const [trip, setTrip] = useState([])
-
-
-    // const getTrip = async () => {
-    //     let response = await getTripService();
-
-    //     if (response == null) {
-    //         console.log("there is no trips!")
-    //     }
-    //     if (response) {
-
-    //         // setState({persons:response})
-    //         // console.log("state in Get :" + state)
-
-
-    //         // console.log("data=>: " + response.toWhere)
-    //         let customerPhone = response.customerPhone;
-    //         let fromWhere = response.fromWhere;
-    //         let toWhere = response.toWhere;
-    //         let tripDate = response.tripDate;
-    //         let tripDetailes = response.tripDetailes;
-    //         let tripId = response.tripId;
-    //         let tripServis = response.tripServis;
-    //         let houseType = response.houseType; //
-    //         let vehicleType = response.vehicleType;
-    //         let Assistants = response.assistants;
-    //         let randomIdForTrip = response.randomIdForTrip;
-    //         let price = response.price;
-    //         let tripTime = '';
-    //         let image = 1;
-    //         let index = 2;
-    //         let no = 1;
-    //         console.log(response.customerPhone, response.fromWhere, response.toWhere, response.tripDate, response.tripDetailes, response.tripId, response.tripServis,)
-    //         setTrip([...trip, { customerPhone, fromWhere, toWhere, tripDate, tripDetailes, tripId, tripServis, houseType, vehicleType, Assistants, randomIdForTrip, price, tripTime, image, index, no }])
-    //         // setTrip([{customerPhone,fromWhere,toWhere,tripDate,tripDetailes,tripId,tripServis,tripTime,image,index,no}])
-    //         // setTrip(trip.splice(1));
-
-    //     }
-    // }
-    // {isFocused && getTrip()}
+    const [tripTaked, settripTaked] = useState(false);
 
 
     const ModalPoup = ({ visible, children }) => {
@@ -141,10 +105,10 @@ export default function MyLoads({ navigation }: any) {
 
 
 
-    let vehicleType = 3;
+    // let vehicleType = 3;
     let no = 0;
-    let tripServis = 2;
-    let houseType = 1;
+    // let tripServis = 2;
+    // let houseType = 1;
 
     return (
 
@@ -152,31 +116,84 @@ export default function MyLoads({ navigation }: any) {
 
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <ModalPoup visible={visible}>
-                    <View style={{ alignItems: 'center' }}>
-                        <View style={styles.header}>
-                            <TouchableOpacity onPress={() => {
-                                setVisible(false)
-                                // navigation.navigate(navigationPage)
 
+                    <View >
+                        {tripTaked == false &&
+                            <View style={{
+                                justifyContent: "center",
+                                alignItems: "center"
                             }}>
-                                <Image
-                                    source={require('../../assets/images/x.png')}
-                                    style={{ height: 30, width: 30 }}
+                                 
+                                    <View style={styles.header}>
+                                        <TouchableOpacity onPress={() => {
+                                            setVisible(false)
+                                            // navigation.navigate(navigationPage)
 
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={{ alignItems: 'center' }}>
-                        <Image
-                            source={require('../../assets/images/success.png')}
-                            style={{ height: 150, width: 150, marginVertical: 10 }}
-                        />
-                    </View>
+                                        }}>
+                                            <Image
+                                                source={require('../../assets/images/x.png')}
+                                                style={{ height: 30, width: 30 }}
 
-                    <Text style={{ marginVertical: 30, fontSize: 20, textAlign: 'center' }}>
-                        {useLocale({}, 'ReserveShipment')}
-                    </Text>
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                
+
+                                <View>
+                                    <Text style={{ fontSize: 18, marginBottom:15 }}>Gönderi numarasını TN-{randomIdForTrip} aktarmak istiyor musunuz? </Text>  
+                                </View>
+                                {/* <View style={styles.square} >
+                                    <Text style={{ fontSize: 18, color: "#ffff", fontWeight: "700" }}>{price} TL</Text>
+                                </View> */}
+                                <View style={{ flexDirection: "row" }}>
+                                    <TouchableOpacity style={styles.squareNo} onPress={()=> setVisible(false)} >
+                                        <Text style={{ fontSize: 18, color: "#ffff", fontWeight: "700" }}>Hayır</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.squareYes} onPress={()=> {
+                                        settripTaked(true)
+                                    }} >
+                                        <Text style={{ fontSize: 18, color: "#ffff", fontWeight: "700" }}>Evet</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+
+
+                        }
+
+
+                        {tripTaked &&
+                            <View>
+                                <View style={{ alignItems: 'center' }}>
+                                    <View style={styles.header}>
+                                        <TouchableOpacity onPress={() => {
+                                            setVisible(false)
+                                            // navigation.navigate(navigationPage)
+
+                                        }}>
+                                            <Image
+                                                source={require('../../assets/images/x.png')}
+                                                style={{ height: 30, width: 30 }}
+
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                <View style={{ alignItems: 'center' }}>
+                                    <Image
+                                        source={require('../../assets/images/success.png')}
+                                        style={{ height: 150, width: 150, marginVertical: 10 }}
+                                    />
+                                </View>
+
+                                <Text style={{ marginVertical: 30, fontSize: 20, textAlign: 'center' }}>
+                                    {useLocale({}, 'ReserveShipment')}
+                                </Text>
+
+                            </View>
+                        }
+
+
+                    </View>
                 </ModalPoup>
             </View>
 
@@ -184,7 +201,7 @@ export default function MyLoads({ navigation }: any) {
             <Card style={styles.listItem}>
                 <View style={{
                     height: 40,
-                    width: 382,
+                    width: "100%",
                     // borderRadius: 28,
                     borderTopLeftRadius: 28,
                     borderTopRightRadius: 28,
@@ -193,7 +210,7 @@ export default function MyLoads({ navigation }: any) {
                     alignContent: "center",
 
                 }}>
-                    <Text style={{ marginTop: 5, fontSize: 20, color: "#ffff", fontWeight: "700" }}>543 TL + KDV </Text>
+                    <Text style={{ marginTop: 5, fontSize: 20, color: "#ffff", fontWeight: "700" }}>{price} TL + KDV </Text>
                 </View>
 
                 <View style={{ flexDirection: "row", padding: 20, paddingBottom: 10 }}>
@@ -244,7 +261,7 @@ export default function MyLoads({ navigation }: any) {
                         {vehicleType == 0 &&
                             <View>
                                 <Text style={styles.infoText}>
-                                    TN-
+                                    TN-{randomIdForTrip}
                                 </Text>
                                 <Text style={styles.infoText}>
                                     Büyük kamyon
@@ -254,7 +271,7 @@ export default function MyLoads({ navigation }: any) {
                         {vehicleType == 1 &&
                             <View>
                                 <Text style={styles.infoText}>
-                                    TN-
+                                    TN-{randomIdForTrip}
                                 </Text>
                                 <Text style={styles.infoText}>
                                     Küçük kamyon
@@ -264,7 +281,7 @@ export default function MyLoads({ navigation }: any) {
                         {vehicleType == 2 &&
                             <View>
                                 <Text style={styles.infoText}>
-                                    TN-
+                                    TN-{randomIdForTrip}
                                 </Text>
                                 <Text style={styles.infoText}>
                                     Orta kamyon
@@ -274,7 +291,7 @@ export default function MyLoads({ navigation }: any) {
                         {vehicleType == 3 &&
                             <View>
                                 <Text style={styles.infoText}>
-                                    KH-
+                                    KH-{randomIdForTrip}
                                 </Text>
                                 <Text style={styles.infoText}>
                                     Büyük kamyon
@@ -332,13 +349,13 @@ export default function MyLoads({ navigation }: any) {
                             <View style={styles.view2}>
                                 <Text style={{ fontSize: 16 }} >{useLocale({}, ('FromWhere'))}</Text>
                             </View>
-                            <Text style={{ marginLeft: 10 }} >sakarya  </Text>
+                            <Text style={{ marginLeft: 10, marginRight: 40 }} >{fromWhere}  </Text>
 
                             <View style={styles.view3}>
                                 {/* <FontAwesome style={styles.view2circle} color="#C4666D" size={FontSize.Regular} name={"circle"} /> */}
                                 <Text style={{ fontSize: 16 }} >{useLocale({}, ('toWhere'))}</Text>
                             </View>
-                            <Text style={{ marginLeft: 10, paddingBottom: 10 }} >ankara </Text>
+                            <Text style={{ marginLeft: 10, paddingBottom: 10, marginRight: 50 }} >{toWhere} </Text>
 
                         </View>
                     </View>
@@ -365,12 +382,12 @@ export default function MyLoads({ navigation }: any) {
 
                                 <View>
                                     <Text style={styles.infoText1}> {useLocale({}, 'shippingDate')}</Text>
-                                    <Text style={styles.infoText}> 2002/2/3</Text>
+                                    <Text style={styles.infoText}> {tripDate}</Text>
                                 </View>
 
                                 <View>
                                     <Text style={styles.infoTextShippingDate}> {useLocale({}, 'shippingTime')}</Text>
-                                    <Text style={styles.infoTextShippingDate2}> 09:30 AM</Text>
+                                    <Text style={styles.infoTextShippingDate2}> {tripTime} AM</Text>
                                 </View>
 
                             </View>
@@ -379,11 +396,11 @@ export default function MyLoads({ navigation }: any) {
                             <View style={{ flexDirection: "row" }}>
                                 <View >
                                     <Text style={styles.infoText1}> Fiyat</Text>
-                                    <Text style={styles.infoText}>50 TL</Text>
+                                    <Text style={styles.infoText}>{price} TL</Text>
                                 </View>
-                                <View style={{ paddingLeft: 85 }}>
+                                <View style={{ paddingLeft: 70 }}>
                                     <Text style={styles.infoText1}> {useLocale({}, "PhoneLabel")}</Text>
-                                    <Text style={styles.infoText}>05535456165 </Text>
+                                    <Text style={styles.infoText}>{customerPhone} </Text>
                                 </View>
                             </View>
 
@@ -468,7 +485,7 @@ export default function MyLoads({ navigation }: any) {
 
                                         <View>
                                             <Text style={styles.infoText1}> {useLocale({}, "AssistantService")}</Text>
-                                            <Text style={styles.infoText}>5 kişi</Text>
+                                            <Text style={styles.infoText}>{assistants} kişi</Text>
                                         </View>
 
                                     </View>
@@ -504,14 +521,10 @@ export default function MyLoads({ navigation }: any) {
                         <View >
                             <Text style={styles.infoText1}> {useLocale({}, 'Details')}</Text>
                             <Text style={{ marginLeft: 27, marginBottom: 15 }}>
-                                kjnasdlkjfn dskjnf
+                                {tripDetailes}
                             </Text>
 
                         </View>
-
-
-
-
 
 
                     </View>
@@ -604,12 +617,12 @@ const styles = StyleSheet.create({
 
     }, infoContainer: {
         flexDirection: "column"
-    },header: {
+    }, header: {
         width: '100%',
         height: 40,
         alignItems: 'flex-end',
         justifyContent: 'center',
-      },
+    },
     infoText: {
         fontSize: 16,
         fontWeight: "400",
@@ -697,6 +710,56 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         borderRadius: 6,
         backgroundColor: "#DEDEDE",
-    },
+    }, square: {
+        width: 80,
+        height: 80,
+        borderColor: "#39A1A3",
+        borderWidth: 1,
+        borderRadius: 20,
+        // borderTopRightRadius: 30,
+        marginBottom: 10,
+        marginLeft: 5,
+        marginTop: 5,
+        flexDirection: 'row',
+        backgroundColor: "#39A1A3",
+        justifyContent: "center",
+        // alignContent:"center",
+        alignItems: "center"
+
+    }, squareNo: {
+        width: 80,
+        height: 60,
+        borderColor: "#C4666D",
+        borderWidth: 1,
+        borderRadius: 20,
+        // borderTopRightRadius: 30,
+        marginBottom: 10,
+        marginLeft: 5,
+        marginTop: 5,
+        flexDirection: 'row',
+        backgroundColor: "#C4666D",
+        justifyContent: "center",
+        // alignContent:"center",
+        alignItems: "center"
+
+
+    }, squareYes: {
+        width: 80,
+        height: 60,
+        borderColor: "#00B287",
+        borderWidth: 1,
+        borderRadius: 20,
+        // borderTopRightRadius: 30,
+        marginBottom: 10,
+        marginLeft: 5,
+        marginTop: 5,
+        flexDirection: 'row',
+        backgroundColor: "#00B287",
+        justifyContent: "center",
+        // alignContent:"center",
+        alignItems: "center"
+
+
+    }
 
 });

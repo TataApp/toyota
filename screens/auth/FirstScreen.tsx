@@ -13,6 +13,7 @@ export default function FirstScreen({ navigation }: { navigation: StackNavigatio
 
     }, []);
 
+    
     return (
         <View style={styles.container}>
                 <Image

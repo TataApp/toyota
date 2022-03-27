@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, StatusBar } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, StatusBar, Dimensions, ScrollView } from 'react-native'
 import AwesomeButton from 'react-native-really-awesome-button';
 //import AwesomeButton from 'react-native-really-awesome-button';
 import IconButton from '../../components/customComponent/IconButton';
@@ -12,6 +12,8 @@ import { useLocale } from '../../hooks/useLocale';
 import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { FontSize } from '../../constants/FontSize';
 import { connect } from 'react-redux';
+//import useOrientation from '../../hooks/useOrientation';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 // function mapStateToProps(state) {
 //     return {
@@ -37,14 +39,25 @@ import { connect } from 'react-redux';
 
 export default  function SecondScreen({ navigation }: { navigation: StackNavigationProp<AuthNavigationParamList, "SignInScreen"> }) {
 
+
     useEffect(() => {
         //Runs only on the first render
+        // changeScreenOrientation();
         StatusBar.setHidden(true);
 
-    }, []);
 
+    });
+
+    //  async function changeScreenOrientation() {
+    //     await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+    //   }
+
+   // const oriention = useOrientation();
+
+  
     return (
 
+        <ScrollView>
         <View style={styles.container}>
             <View style={styles.text1}>
             {/* <Text style={{ fontSize: 30 }} >{Object.values(this.props.data)} </Text> */}
@@ -53,7 +66,7 @@ export default  function SecondScreen({ navigation }: { navigation: StackNavigat
                 <Text style={{ fontSize: 20, color: useThemeColor({}, "gri") }}>{useLocale({}, "secondScreen2")}</Text>
             </View>
             <Image
-                style={{ width: 350, height: 240, marginLeft: 30 }}
+                style={{ width: Dimensions.get("window").width /1.2 , height: Dimensions.get("window").height /3, marginLeft: 30 }}
                 source={require('../../assets/images/kamyon2.png')}
             />
 
@@ -62,7 +75,7 @@ export default  function SecondScreen({ navigation }: { navigation: StackNavigat
                     navigation.navigate('SignInScreen')
                 }} />
             </View>
-            <View style={styles.button}>
+            <View style={styles.button2}>
                 <FlatButton text={useLocale({}, "secondScreen4")} bgrColor="#3DCCC0" onPress={() => {
                     navigation.navigate("SignUpScreen")
                 }} />
@@ -73,6 +86,8 @@ export default  function SecondScreen({ navigation }: { navigation: StackNavigat
 
 
         </View>
+        </ScrollView>
+
 
     )
 }
@@ -82,8 +97,9 @@ export default  function SecondScreen({ navigation }: { navigation: StackNavigat
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        // width: 30,
         // justifyContent: 'center',
-        // alignItems: 'center',
+         alignItems: 'center',
         backgroundColor: "white",
         // flexDirection: 'column',
 
@@ -101,27 +117,16 @@ const styles = StyleSheet.create({
     },
     button: {
         paddingTop: 20,
-        paddingLeft: 30,
-        paddingRight: 30,
+
+        // paddingLeft: 30,
+        // paddingRight: 30,
 
         //  width:0
 
 
-    }, commandButton: {
-        padding: 15,
-        marginLeft: 30,
-        paddingLeft: 70,
-        marginRight: 30,
-        marginBottom: 30,
-        borderRadius: 15,
-        backgroundColor: '#5031C2',
-        alignItems: 'center',
-        marginTop: 15,
-        flexDirection: "row",
-    }, panelButtonTitle: {
-        fontSize: 17,
-        fontWeight: 'bold',
-        color: 'white',
-        // marginLeft: 80
-    },
+    },button2:{
+        paddingTop: 20,
+        paddingBottom: 100
+
+    }
 })

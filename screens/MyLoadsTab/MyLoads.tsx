@@ -97,7 +97,7 @@ export default function MyLoads() {
 
   useFocusEffect(
     React.useCallback(() => {
-     getTrip();
+    //  getTrip();
     }, [])
     
   );

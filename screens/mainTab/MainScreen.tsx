@@ -74,28 +74,6 @@ export default function MainScreen({ navigation }: any) {
         }
         if (response) {
 
-            // console.log("1 ==> : "+ response)
-
-            //  let customerPhone = response.tripsForDrivers;
-            // console.log("1 ==> : "+ customerPhone)
-
-            // let fromWhere = response.fromWhere;
-            // let toWhere = response.toWhere;
-            // let tripDate = response.tripDate;
-            // let tripDetailes = response.tripDetailes;
-            // let tripId = response.tripId;
-            // let tripServis = response.tripServis;
-            // let houseType = response.houseType; //
-            // let vehicleType = response.vehicleType;
-            // let Assistants = response.assistants;
-            // let randomIdForTrip = response.randomIdForTrip;
-            // let price = response.price;
-            // let tripTime = '';
-            // let image = 1;
-            // let index = 2;
-            // let no = 1;
-            // console.log(response.customerPhone, response.fromWhere, response.toWhere, response.tripDate, response.tripDetailes, response.tripId, response.tripServis,)
-            // setTrip([...trip, { customerPhone, fromWhere, toWhere, tripDate, tripDetailes, tripId, tripServis, houseType, vehicleType, Assistants, randomIdForTrip, price, tripTime, image, index, no }])
 
 
         }
@@ -165,13 +143,13 @@ export default function MainScreen({ navigation }: any) {
     return (
 
         <View style={[styles.flex1]}>
-            
+
             <View style={{ flexDirection: 'row', backgroundColor: '#ffff' }}>
                 <Image
                     style={{ marginLeft: 15, marginBottom: 15, marginTop: 15, width: 170, height: 34 }}
                     source={require('../../assets/images/logo3.png')}
                 />
-            </View> 
+            </View>
             <View style={styles.separator}></View>
 
             <FlatList
@@ -185,14 +163,14 @@ export default function MainScreen({ navigation }: any) {
 
                     <View>
                         <TouchableOpacity style={{ flexDirection: "row" }} onPress={() => {
-                            navigation.navigate("tripDetails")
+                            navigation.navigate("tripDetails", { assistants: item.assistants, customerPhone: item.customerPhone, distance: item.distance, fromWhere: item.fromWhere, houseType: item.houseType, price: item.price, randomIdForTrip: item.randomIdForTrip, toWhere: item.toWhere, tripDate: item.tripDate, tripDetailes: item.tripDetailes, tripServis: item.tripServis, tripTime: item.tripTime, vehicleType: item.vehicleType })
                         }}
                         >
                             <View>
                                 <View style={{ flexDirection: "row" }}>
                                     <Text style={{ marginLeft: 20, fontSize: 20 }}>{item.fromWhereCity}</Text>
                                     <Text style={{ marginLeft: 10, marginTop: 10, fontSize: 12 }}>{item.distance} Km</Text>
-                                    <Text style={{ marginLeft: 40, fontSize: 20 }}>{item.toWhereCity}</Text>
+                                    <Text style={{ marginLeft: 20, fontSize: 20 }}>{item.toWhereCity}</Text>
                                 </View>
 
                                 <View style={{ flexDirection: "row" }}>
@@ -210,7 +188,28 @@ export default function MainScreen({ navigation }: any) {
 
                                 <View style={{ flexDirection: "row" }}>
                                     <Text style={{ marginLeft: 20, fontSize: 20, color: "#7B7B7B" }}>{item.fromWhereRegion}</Text>
-                                    <Text style={{ marginLeft: 0, fontSize: 15, marginTop: 20, color: "black" }}>Büyük Kamyon</Text>
+
+                                    <View >
+
+                                        {item.vehicleType == 0 &&
+                                            <Text style={{ marginLeft: 0, fontSize: 13, marginTop: 20, color: "black" }}>Büyük Kamyon</Text>
+
+                                        }
+                                        {item.vehicleType == 1 &&
+                                            <Text style={{ marginLeft: 0, fontSize: 13, marginTop: 20, color: "black" }}>Küçük Kamyon</Text>
+
+                                        }
+                                        {item.vehicleType == 2 &&
+                                            <Text style={{ marginLeft: 0, fontSize: 13, marginTop: 20, color: "black" }}>Orta Kamyon</Text>
+
+                                        }
+                                        {item.vehicleType == 3 &&
+                                            <Text style={{ marginLeft: 0, fontSize: 13, marginTop: 20, color: "black" }}>Büyük Kamyon</Text>
+                                        }
+
+                                    </View>
+
+                                    {/* <Text style={{ marginLeft: 0, fontSize: 13, marginTop: 20, color: "black" }}>Büyük Kamyon</Text> */}
 
                                     <Text style={{ marginLeft: 0, fontSize: 20, color: "#7B7B7B", marginBottom: 10 }}>{item.toWhereRegion}</Text>
                                 </View>
@@ -219,7 +218,7 @@ export default function MainScreen({ navigation }: any) {
                             </View>
 
                             <View style={styles.square} >
-                                <Text style={{ fontSize: 20, color: "#ffff", fontWeight: "700" }}>{item.price} TL</Text>
+                                <Text style={{ fontSize: 18, color: "#ffff", fontWeight: "700" }}>{item.price} TL</Text>
                             </View>
 
                         </TouchableOpacity>
