@@ -1,7 +1,7 @@
 import { StackNavigationState } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { StyleSheet, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Dimensions } from 'react-native'
 import { View } from "../../components/themed/View";
 import { Text } from "../../components/themed/Text";
 import { ScreenContext } from '../../contexts/ScreenContext';
@@ -34,11 +34,13 @@ import { useDispatch } from 'react-redux';
 import { AsyncStorage } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 
 
 var Spinner = require('react-native-spinkit');
 export default function SignInScreen({ navigation }: { navigation: StackNavigationProp<AuthNavigationParamList, "SignInScreen"> }) {
+    const [buttonWidth, setbuttonWidth] = useState(Dimensions.get('window').height / 2);
 
 
 
@@ -177,6 +179,7 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
 
 
 
+
     const [phone, setPhone] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [loaded, setLoaded] = useState(false);
@@ -222,7 +225,7 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
             return false;
 
         }
-   
+
         let responsePhone = await checkPhoneService(phone);
 
         if (responsePhone.data.exists == false) {
@@ -236,9 +239,6 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
 
 
     }
-
-
-
 
 
     const checkPassward = async (): Promise<boolean> => {
@@ -305,6 +305,33 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
             setLoaded(true)
     }
 
+   
+    useEffect(() => {
+
+        const updateLayout = () => {
+            // let data:any;
+
+            ScreenOrientation.getOrientationAsync().then((data) => {
+                // console.log(data)
+                // LANDSCAPE_LEFT = 3,   LANDSCAPE_RIGHT = 4,
+                if (data === 4 || data === 3) {
+                    setbuttonWidth(Dimensions.get('window').width / 1.5);
+                    // console.log("LANDSCAPE");
+
+                } else {
+                    setbuttonWidth(Dimensions.get('window').height / 2)
+                }
+            });
+
+        };
+
+        Dimensions.addEventListener('change', updateLayout);
+        return () => {
+            Dimensions.removeEventListener('change', updateLayout);
+        }
+    })
+    
+
 
     const Stages: Stage[] = [
         {//1 phone
@@ -315,33 +342,35 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
                     styles.center
                 ]}>
                     <ScrollView>
+                        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={30}>
 
-                        <Text style={styles.topLabel2} > {useLocale({}, "phoneScreen")}</Text>
+                            <Text style={styles.topLabel2} > {useLocale({}, "phoneScreen")}</Text>
 
-                        <View style={[styles.center2, styles.background]}>
-                            <InputWithLabel
-                                keyboadType='number-pad'
-                                errorMessage={""}
-                                label={useLocale({}, "PhoneLabel")}
-                                setValue={(value: string) => setPhone(value.trim())}
-                                value={phone.trim()}
-                                mode={"outlined"}
-                                placeholder={useLocale({}, "PhoneLabel")}
-                            />
-                        </View>
-                        <Text style={{ color: 'red', fontSize: FontSize.Small }}>{phoneErrorMessage}</Text>
+                            <View style={[styles.center2, styles.background]}>
+                                <InputWithLabel
+                                    keyboadType='number-pad'
+                                    errorMessage={""}
+                                    label={useLocale({}, "PhoneLabel")}
+                                    setValue={(value: string) => setPhone(value.trim())}
+                                    value={phone.trim()}
+                                    mode={"outlined"}
+                                    placeholder={useLocale({}, "PhoneLabel")}
+                                />
+                            </View>
+                            <Text style={{ color: 'red', fontSize: FontSize.Small }}>{phoneErrorMessage}</Text>
 
 
-                        <View style={{ marginLeft: 15 }}>
-                            <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
+                            <View style={{ marginLeft: 15 }}>
+                                <Text style={styles.newUser}>{useLocale({}, "newUser")}</Text>
 
-                            <TouchableOpacity>
-                                <Text style={styles.SignOut} onPress={() => {
-                                    navigation.navigate('SignUpScreen')
-                                }}>{useLocale({}, "goToSignUp")}</Text>
-                            </TouchableOpacity>
-                        </View>
+                                <TouchableOpacity>
+                                    <Text style={styles.SignOut} onPress={() => {
+                                        navigation.navigate('SignUpScreen')
+                                    }}>{useLocale({}, "goToSignUp")}</Text>
+                                </TouchableOpacity>
+                            </View>
 
+                        </KeyboardAvoidingView>
 
                     </ScrollView>
 
@@ -361,8 +390,7 @@ export default function SignInScreen({ navigation }: { navigation: StackNavigati
                             <FontAwesome style={{ marginLeft: 5 }} name={"chevron-right"} color={"#ffff"} size={FontSize.xLarge}></FontAwesome>
                         </TouchableOpacity>
                     </View>
-
-                </ View>
+                </ View >
             ),
             Verifyier: checkPhone,
             Submit: async () => true
