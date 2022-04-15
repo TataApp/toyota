@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import { View } from '../themed/View'
 import { Text } from '../themed/Text'
 import { FontSize } from '../../constants/FontSize'
@@ -9,7 +9,7 @@ import { TextInput  } from 'react-native-paper';
 
 
 export default function InputWithLabel(
-    {backgroundColor,label,errorMessage,placeholder,value,setValue,secureTextEntry,keyboadType ,mode,}:
+    {backgroundColor,label,errorMessage,placeholder,value,setValue,secureTextEntry,keyboadType ,mode,outlineColor,multiline}:
     {
         backgroundColor:string,
         label:string,
@@ -20,10 +20,12 @@ export default function InputWithLabel(
         secureTextEntry?:boolean,
         keyboadType:any
         mode:any,
+        outlineColor:any,
+        multiline:any,
     }) {
     const styles = StyleSheet.create({
         inputComponentContainer: {
-            width: '80%',
+            width: Dimensions.get("window").width / 1.1 ,//'80%',
             backgroundColor:backgroundColor,
             // color:'black'
         },
@@ -50,7 +52,8 @@ export default function InputWithLabel(
         <View style={styles.inputComponentContainer}>
             <Text style={{color:'black'}}>{label}</Text>
             {errorMessage.length > 0 ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
-            <TextInput theme={{ colors: { primary: '#299195',underlineColor:'#299195',}}} selectionColor={"#299195"} outlineColor={"#299195"}  mode={mode} keyboardType={keyboadType} secureTextEntry={secureTextEntry}  label={placeholder}  value={value} onChangeText={setValue} />
+            <TextInput theme={{ colors: { primary: '#299195',underlineColor:'#299195',}}} selectionColor={"#299195"} outlineColor={outlineColor} mode={mode} keyboardType={keyboadType} secureTextEntry={secureTextEntry}  label={placeholder} multiline={multiline}  value={value} onChangeText={setValue} /> 
+            {/* outlineColor={"#299195"}  */}
         </View>
     )
 }

@@ -152,7 +152,23 @@ export default {
     plateNumber:"Plaka numarası",
     truckAddress:"Kamyon adresiniz",
     optionalEmailLabel:"E-posta (opsiyonlu)",
-    ReserveShipment:"Tebrikler, bu yükü sizin için rezerve edildi. ( Yüklerim ) sayfasından tüm yüklerinizi görebilirsiniz."
+    ReserveShipment:"Tebrikler, bu yükü sizin için rezerve edildi. ( Yüklerim ) sayfasından tüm yüklerinizi görebilirsiniz.",
+
+
+
+
+
+
+    DiviceUUID:"Cihaz UUID",
+    AllComponentsPage1:"All Components Page 1" ,
+    Section1:"Section1",
+    Section2:"Section2",
+    Section3:"Section3",
+    InputNumber:"Input Number",
+    InputDate:"Input Date",
+    InputEmail:"Input Email",
+    Lisans:"Your account has been verified, you can continue.",
+
 
     
 
@@ -319,7 +335,22 @@ export default {
     truckAddress:"Kamyon adresiniz",
     optionalEmailLabel:"E-posta (opsiyonlu)",
     TakeOffer:"Take Offer",
-    ReserveShipment:"Tebrikler, bu yükü sizin için rezerve edildi. ( Yüklerim ) sayfasından tüm yüklerinizi görebilirsiniz."
+    ReserveShipment:"Tebrikler, bu yükü sizin için rezerve edildi. ( Yüklerim ) sayfasından tüm yüklerinizi görebilirsiniz.",
+
+
+    DiviceUUID:"رقم UUID",
+    AllComponentsPage1:"كافة المكونات الصفحة 1" ,
+    Section1:"القسم 1",
+    Section2:"القسم 2",
+    Section3:"القسم 3",
+    InputNumber:"رقم الإدخال",
+    InputDate:"ادخل التاريخ",
+    InputEmail:"ادخل البريد الإلكتروني",
+    Lisans:"تم التحقق من حسابكم يمكنكم المتابعة .",
+
+
+
+    
 
 
 
@@ -483,7 +514,23 @@ export default {
     plateNumber:"Plaka numarası",
     truckAddress:"Kamyon adresiniz",
     optionalEmailLabel:"E-posta (opsiyonlu)",
-    ReserveShipment:"Tebrikler, bu yükü sizin için rezerve edildi. ( Yüklerim ) sayfasından tüm yüklerinizi görebilirsiniz."
+    ReserveShipment:"Tebrikler, bu yükü sizin için rezerve edildi. ( Yüklerim ) sayfasından tüm yüklerinizi görebilirsiniz.",
+
+
+    DiviceUUID:"Divice UUID",
+    AllComponentsPage1:"Tüm Bileşenler Sayfa 1",
+    Section1:"Bölüm 1",
+    Section2:"Bölüm 2",
+    Section3:"Bölüm 3",
+    InputNumber:"Numara giriniz",
+    InputDate:"Tarihi giriniz",
+    InputEmail:"E-posta giriniz",
+    Lisans:"Hesabınız doğrulandı, devam edebilirsiniz.",
+
+
+
+
+
 
 
   },

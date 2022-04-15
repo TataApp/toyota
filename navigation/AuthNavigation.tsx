@@ -21,21 +21,18 @@ export default function AuthNavigation() {
                 component={FirstScreen}
                 options={ {headerShown: false}}
             />
-            <AuthStack.Screen
-                name="SecondScreen"
-                component={SecondScreen}
-                options={ {headerShown: false}}
-            />
-            {/* <AuthStack.Screen
-                name='EmployeeApp'
-                component={EmployeeApp}
-                options={ {headerShown: false}}
-            /> */}
+        
             <AuthStack.Screen
                 name="SignInScreen"
                 component={SignInScreen}
                 
-                options={{ headerTitle: useLocale({},"signInHeader") }}
+                options={{ 
+                   // headerTitle: useLocale({},"signInHeader"),
+                     headerShown: false
+
+
+
+                }}
             />
             <AuthStack.Screen
                 name="SignUpScreen"

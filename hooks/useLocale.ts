@@ -5,7 +5,7 @@ import useDeviceLocale from './useDeviceLocale';
 
 export function useLocale(
   props: { en?: string; ar?: string ;tr?: string},
-  stringName: keyof typeof Locale.tr //keyof typeof Locale.en & keyof typeof Locale.ar & keyof typeof Locale.tr
+  stringName: keyof typeof Locale.en & keyof typeof Locale.ar & keyof typeof Locale.tr
 ) {
   const locale = useDeviceLocale();
   const stringFromLocale = props[locale];

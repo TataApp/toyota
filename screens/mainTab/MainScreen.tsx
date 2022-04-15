@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useRef, useState } from 'react'
-import { FlatList, StyleSheet, Image, LogBox, Modal, Text } from 'react-native'
+import { FlatList, StyleSheet, Image, Dimensions, Modal, Text } from 'react-native'
 import { View } from "../../components/themed/View";
 
 
@@ -21,11 +21,15 @@ import { FontSize } from '../../constants/FontSize';
 import { color } from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { getTripsForDriverService } from '../../services/apiCalls/getTripsForDriverService'
+import { FontAwesome5 } from '@expo/vector-icons';
+import { useNetInfo } from "@react-native-community/netinfo";
+import { useThemeColor } from '../../hooks/useThemeColor';
 
 
 export default function MainScreen({ navigation }: any) {
 
 
+    const netInfo = useNetInfo();
 
     //#region 
     const dispach = useDispatch();
@@ -41,20 +45,6 @@ export default function MainScreen({ navigation }: any) {
 
 
 
-    // const [trips, setTrips,] = useState([
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "1" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Sakarya", regionFromWhere: "sedivan", regionToWhere: "adabazari", kilometers: "23km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "2" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "3" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "4" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "5" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "6" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "7" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "8" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "9" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Sakarya', truckType: 'Büyük Kamyon', price: "534", key: "10" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'Istanbul', truckType: 'Büyük Kamyon', price: "534", key: "11" },
-    //     { cityFromWhere: "Sakarya", cityToWhere: "Istanbul", regionFromWhere: "sedivan", regionToWhere: "uskudar", kilometers: "450km", label: 'ttt', truckType: 'Büyük Kamyon', price: "534", key: "12" },
-    // ]);
 
     let response: any;
     const getTripsForDriver = async () => {
@@ -144,11 +134,17 @@ export default function MainScreen({ navigation }: any) {
 
         <View style={[styles.flex1]}>
 
+
             <View style={{ flexDirection: 'row', backgroundColor: '#ffff' }}>
+                {/* <Text>Is Connected: {(netInfo.isConnected)}</Text> */}
                 <Image
-                    style={{ marginLeft: 15, marginBottom: 15, marginTop: 15, width: 170, height: 34 }}
-                    source={require('../../assets/images/logo3.png')}
+                    style={{ marginLeft: Dimensions.get('window').width / 2 - 70, marginBottom: 15, marginTop: 13, width: 120, height: 40 }}
+                    source={require('../../assets/images/invis.png')}
+
                 />
+                <View style={{ marginTop: 20, marginLeft: 10 }}>
+                        <FontAwesome5 name="wifi" size={FontSize.xLarge} color={netInfo.isConnected == true ? useThemeColor({}, "green") : useThemeColor({}, "red")} />
+                </View>
             </View>
             <View style={styles.separator}></View>
 
